@@ -36,24 +36,38 @@ namespace Boomwhackers
             LoadData(loadFile);
         }
 
+        public string DefaultLocation()
+        {
+            string path = Path.Combine(projectRoot, projectName);
+            return Path.ChangeExtension(path, extension);
+        }
+
+        public void SaveData()
+        {
+            SaveData(DefaultLocation());
+        }
+
         public void SaveData(string path = null)
         {
             if (path == null)
             {
-                path = Path.Combine(projectRoot, projectName);
-                Path.ChangeExtension(path, extension);
+                path = DefaultLocation();
             }
 
             if (!VerifyExtension(path))
             {
                 throw new Exception("Invalid file extension");
             }
+
+            string jsonData = JsonConvert.SerializeObject(data);
+
+            File.WriteAllText(path, jsonData);
         }
 
 
         public void LoadData(string loadFile)
         {
-            if (!CheckExtension(loadFile))
+            if (!VerifyExtension(loadFile))
             {
                 throw new Exception("Invalid file extension");
             }
