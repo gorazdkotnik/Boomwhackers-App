@@ -11,11 +11,16 @@ namespace Boomwhackers
         private string displayName;
         private string displayColor;
 
-        public NoteType(string displayName, string displayColor)
+        private int noteValue;
+
+        public NoteType(string displayName, string displayColor, int noteValue)
         {
             this.displayName = displayName;
             this.displayColor = displayColor;
+            this.noteValue = noteValue;
         }
+
+        public NoteType() : this("C", "White", 0) { }
 
         public string DisplayName
         {
@@ -27,6 +32,12 @@ namespace Boomwhackers
         {
             get { return displayColor; }
             set { displayColor = value; }
+        }
+
+        public int NoteValue
+        {
+            get { return noteValue; }
+            set { noteValue = value; }
         }
     }
 }
