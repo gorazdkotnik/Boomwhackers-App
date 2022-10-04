@@ -8,6 +8,25 @@ namespace Boomwhackers
 {
     class NoteType
     {
-        string displayName;
+        private string displayName;
+        private string displayColor;
+
+        public NoteType(string displayName, string displayColor)
+        {
+            this.displayName = displayName;
+            this.displayColor = displayColor;
+        }
+
+        public string DisplayName
+        {
+            get { return displayName; }
+            set { displayName = value; }
+        }
+
+        public string DisplayColor
+        {
+            get { return displayColor; }
+            set { displayColor = value; }
+        }
     }
 }
