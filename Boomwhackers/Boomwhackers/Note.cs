@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boomwhackers
 {
-    class Note
+    public class Note
     {
         private NoteType noteType;
         private float time;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boomwhackers
 {
-    class NoteType
+    public class NoteType
     {
         private string displayName;
         private string displayColor;

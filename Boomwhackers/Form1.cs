@@ -46,8 +46,14 @@ namespace Boomwhackers
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
-            var form2 = new Form2();
+            Form form2 = new Form2();
             form2.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form editor = new Editor(project);
+            editor.Show();
         }
     }
 }

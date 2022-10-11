@@ -12,8 +12,14 @@ namespace Boomwhackers
 {
     public partial class Editor : Form
     {
-        public Editor()
+        BoomProject openProject;
+        public Editor(BoomProject project)
         {
+            openProject = project;
+
+            // Show the notes
+            
+
             InitializeComponent();
         }
     }

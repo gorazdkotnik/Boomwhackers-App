@@ -11,7 +11,7 @@ namespace Boomwhackers
 {
     public class InvalidExtensionException : Exception { }
     public class InvalidDataException : Exception { }
-    class BoomProject
+    public class BoomProject
     {
         public static string extension = ".boom";
         public static string filter = "Boom project (*" + extension + ")|*" + extension;
@@ -24,10 +24,8 @@ namespace Boomwhackers
 
         public string projectName;
 
-        [JsonProperty]
-        private BoomData data = new BoomData();
-        [JsonProperty]
-        private string projectRoot;
+        public BoomData data = new BoomData();
+        public string projectRoot;
 
         public BoomProject(string projectName, string projectRoot)
         {

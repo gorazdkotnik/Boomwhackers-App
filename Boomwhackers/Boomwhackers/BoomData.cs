@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boomwhackers
 {
-    class BoomData
+    public class BoomData
     {
         Dictionary<float, Note> notes = new Dictionary<float, Note>();
     }

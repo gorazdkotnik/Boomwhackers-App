@@ -29,10 +29,8 @@ namespace Boomwhackers
         /// </summary>
         private void InitializeComponent()
         {
-            this.performanceCounter1 = new System.Diagnostics.PerformanceCounter();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +59,6 @@ namespace Boomwhackers
             this.Controls.Add(this.statusStrip1);
             this.Name = "Editor";
             this.Text = "Editor";
-            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -71,7 +68,6 @@ namespace Boomwhackers
 
         #endregion
 
-        private System.Diagnostics.PerformanceCounter performanceCounter1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
