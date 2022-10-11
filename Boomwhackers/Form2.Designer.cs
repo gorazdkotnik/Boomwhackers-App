@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             this.formTitleLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.projectNameTextBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.projectNameLabel = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.projectRootLabel = new System.Windows.Forms.Label();
+            this.projectRootTextBox = new System.Windows.Forms.TextBox();
+            this.folderBrowserButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // formTitleLabel
@@ -46,12 +50,12 @@
             this.formTitleLabel.Text = "Ustvari nov projekt";
             this.formTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // projectNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 90);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(349, 22);
-            this.textBox1.TabIndex = 1;
+            this.projectNameTextBox.Location = new System.Drawing.Point(12, 90);
+            this.projectNameTextBox.Name = "projectNameTextBox";
+            this.projectNameTextBox.Size = new System.Drawing.Size(349, 22);
+            this.projectNameTextBox.TabIndex = 1;
             // 
             // projectNameLabel
             // 
@@ -62,13 +66,53 @@
             this.projectNameLabel.TabIndex = 2;
             this.projectNameLabel.Text = "Ime projekta";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(13, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // projectRootLabel
+            // 
+            this.projectRootLabel.AutoSize = true;
+            this.projectRootLabel.Location = new System.Drawing.Point(16, 145);
+            this.projectRootLabel.Name = "projectRootLabel";
+            this.projectRootLabel.Size = new System.Drawing.Size(110, 16);
+            this.projectRootLabel.TabIndex = 4;
+            this.projectRootLabel.Text = "Lokacija projekta";
+            // 
+            // projectRootTextBox
+            // 
+            this.projectRootTextBox.Enabled = false;
+            this.projectRootTextBox.Location = new System.Drawing.Point(12, 165);
+            this.projectRootTextBox.Name = "projectRootTextBox";
+            this.projectRootTextBox.Size = new System.Drawing.Size(349, 22);
+            this.projectRootTextBox.TabIndex = 5;
+            // 
+            // folderBrowserButton
+            // 
+            this.folderBrowserButton.Location = new System.Drawing.Point(368, 165);
+            this.folderBrowserButton.Name = "folderBrowserButton";
+            this.folderBrowserButton.Size = new System.Drawing.Size(131, 23);
+            this.folderBrowserButton.TabIndex = 6;
+            this.folderBrowserButton.Text = "Izberite lokacijo";
+            this.folderBrowserButton.UseVisualStyleBackColor = true;
+            this.folderBrowserButton.Click += new System.EventHandler(this.folderBrowserButton_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.folderBrowserButton);
+            this.Controls.Add(this.projectRootTextBox);
+            this.Controls.Add(this.projectRootLabel);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.projectNameLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.projectNameTextBox);
             this.Controls.Add(this.formTitleLabel);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -81,10 +125,14 @@
         #endregion
 
         private System.Windows.Forms.Label formTitleLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox projectNameTextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label projectNameLabel;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label projectRootLabel;
+        private System.Windows.Forms.TextBox projectRootTextBox;
+        private System.Windows.Forms.Button folderBrowserButton;
     }
 }

@@ -21,5 +21,13 @@ namespace Boomwhackers
         {
 
         }
+
+        private void folderBrowserButton_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                projectRootTextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 }
