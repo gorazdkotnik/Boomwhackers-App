@@ -13,18 +13,21 @@ namespace Boomwhackers
     public partial class Form1 : Form
     {
         BoomProject project;
+        static string location = "C:\\Users\\anzeb\\TestBoomwhackers\\Test1";
         OpenFileDialog openProjectDialog = new OpenFileDialog()
         {
             FileName = "Izberi projekt",
             Filter = BoomProject.filter,
-            Title = "Odpri Boomwhackers projekt"
+            Title = "Odpri Boomwhackers projekt",
+            InitialDirectory = location
         };
         public Form1()
         {
             InitializeComponent();
 
-            string location = "C:\\Users\\anzeb\\TestBoomwhackers\\Test1";
-            BoomProject project = new BoomProject("testProject", location);
+            
+            project = new BoomProject("testProject", location);
+            jsonData.Text = project.jsonData;
         }
 
         private void SaveProject(object sender, EventArgs e)

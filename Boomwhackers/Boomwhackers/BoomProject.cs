@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Diagnostics;
 
 namespace Boomwhackers
 {
@@ -12,8 +13,8 @@ namespace Boomwhackers
     public class InvalidDataException : Exception { }
     class BoomProject
     {
-        public static string extension = "boom";
-        public static string filter = "Boom project (*." + extension + ")|*." + extension;
+        public static string extension = ".boom";
+        public static string filter = "Boom project (*" + extension + ")|*" + extension;
 
         public static bool VerifyExtension(string path)
         {
@@ -23,7 +24,9 @@ namespace Boomwhackers
 
         public string projectName;
 
+        [JsonProperty]
         private BoomData data = new BoomData();
+        [JsonProperty]
         private string projectRoot;
 
         public BoomProject(string projectName, string projectRoot)
@@ -48,11 +51,12 @@ namespace Boomwhackers
             SaveData(DefaultLocation());
         }
 
+        [JsonIgnore]
         public string jsonData
         {
             get
             {
-                return JsonConvert.SerializeObject(data);
+                return JsonConvert.SerializeObject(this);
             }
         }
 
@@ -81,14 +85,12 @@ namespace Boomwhackers
 
             string loadData = File.ReadAllText(loadFile);
 
-            BoomData loadedProject = JsonConvert.DeserializeObject<BoomData>(loadData);
-
-            if (loadedProject == null)
+            try
             {
-                throw new Exception("Invalid project");
+                JsonConvert.PopulateObject(loadData, this);
+            } catch {
+                throw new InvalidDataException();
             }
-
-            data = loadedProject;
         }
     }
 }
