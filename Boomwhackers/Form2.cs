@@ -41,10 +41,18 @@ namespace Boomwhackers
                 MessageBox.Show("Pot do projekta ne sme biti prazna.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
+            try
+            {
+                BoomProject project = new BoomProject(projectName, projectRoot);
+                project.SaveData();
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            BoomProject project = new BoomProject(projectName, projectRoot);
-            project.SaveData();
-            this.Close();
         }
     }
 }
