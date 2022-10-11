@@ -13,6 +13,7 @@ namespace Boomwhackers
     class BoomProject
     {
         public static string extension = "boom";
+        public static string filter = "Boom project (*." + extension + ")|*." + extension;
 
         public static bool VerifyExtension(string path)
         {
@@ -25,13 +26,13 @@ namespace Boomwhackers
         private BoomData data = new BoomData();
         private string projectRoot;
 
-        BoomProject(string projectName, string projectRoot)
+        public BoomProject(string projectName, string projectRoot)
         {
             this.projectName = projectName;
             this.projectRoot = projectRoot;
         }
 
-        BoomProject(string loadFile)
+        public BoomProject(string loadFile)
         {
             LoadData(loadFile);
         }
@@ -47,6 +48,14 @@ namespace Boomwhackers
             SaveData(DefaultLocation());
         }
 
+        public string jsonData
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(data);
+            }
+        }
+
         public void SaveData(string path = null)
         {
             if (path == null)
@@ -58,8 +67,6 @@ namespace Boomwhackers
             {
                 throw new Exception("Invalid file extension");
             }
-
-            string jsonData = JsonConvert.SerializeObject(data);
 
             File.WriteAllText(path, jsonData);
         }
