@@ -12,6 +12,8 @@ namespace Boomwhackers
 {
     public partial class Form2 : Form
     {
+        public BoomProject project { get; set; }
+
         public Form2()
         {
             InitializeComponent();
@@ -44,8 +46,9 @@ namespace Boomwhackers
             
             try
             {
-                BoomProject project = new BoomProject(projectName, projectRoot);
+                project = new BoomProject(projectName, projectRoot);
                 project.SaveData();
+
                 this.Close();
             }
             catch (Exception ex)
