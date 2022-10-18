@@ -14,14 +14,20 @@ namespace Boomwhackers
     {
         BoomProject openProject;
 
-        List<Button> noteButtons;
+        List<Control> editorControls;
 
         int margin = 10;
         int rowHeight = 50;
         int colWidth = 50;
 
+        int firstColumnWidth = 100;
+
+        int leftSideMargin;
+
         public Editor(BoomProject project)
         {
+            leftSideMargin = firstColumnWidth + margin * 2;
+            
             openProject = project;
 
             InitializeComponent();
@@ -34,19 +40,19 @@ namespace Boomwhackers
 
 
             // remove old 
-            if (noteButtons != null)
+            if (editorControls != null)
             {
-                foreach (Button b in noteButtons)
+                foreach (Control b in editorControls)
                 {
                     b.Dispose();
                 }
             }
 
             // add new
-
-            noteButtons = new List<Button>();
             
-            float x = margin;
+            editorControls = new List<Control>();
+
+            float x = margin + firstColumnWidth + margin;
             float y = margin;
 
             int row = 0;
@@ -54,9 +60,21 @@ namespace Boomwhackers
             {
                 y = row * rowHeight + margin;
 
+                Label typeLabel = new Label()
+                {
+                    Text = noteType.displayName,
+                    Location = new Point(margin, (int)y),
+                    Size = new Size(firstColumnWidth, rowHeight),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    BackColor = Color.FromName(noteType.displayColor)
+                };
+
+                editorControls.Add(typeLabel);
+                Controls.Add(typeLabel);
+
                 foreach (var note in noteType.notes)
                 {
-                    x = note.Key * colWidth + margin;
+                    x = note.Key * colWidth + leftSideMargin;
 
                     Button noteBtn = new Button()
                     {
@@ -72,13 +90,30 @@ namespace Boomwhackers
                         RedrawButtons();
                     };
 
-                    noteButtons.Add(noteBtn);
+                    editorControls.Add(noteBtn);
                     Controls.Add(noteBtn);
                 }
 
                 row++;
-
             }
+
+            // "+" button to add new notetype
+
+            Button addNoteTypeBtn = new Button()
+            {
+                Text = "+",
+                Location = new Point(margin, (int)y + rowHeight + margin),
+                Size = new Size(firstColumnWidth, rowHeight),
+                BackColor = Color.LightGray
+            };
+
+            addNoteTypeBtn.Click += (sender, e) =>
+            {
+                
+            };
+
+            editorControls.Add(addNoteTypeBtn);
+            Controls.Add(addNoteTypeBtn);
         }
 
         private void Editor_MouseClick(object sender, MouseEventArgs e)
@@ -90,12 +125,12 @@ namespace Boomwhackers
 
             statusLabel.Text = clickPos.ToString();
 
-            if (clickPos.X < margin || clickPos.Y < margin)
+            if (clickPos.X < leftSideMargin || clickPos.Y < margin)
             {
                 return;
             }
 
-            float notePosition = (clickPos.X - margin) / colWidth;
+            float noteTime = (clickPos.X - leftSideMargin) / colWidth;
 
             // Get the note type (row) at this y position
             int noteTypeIndex = (clickPos.Y - margin) / rowHeight;
@@ -108,9 +143,9 @@ namespace Boomwhackers
             NoteType noteType = openProject.data.notes[noteTypeIndex];
 
             // Add the note to the project
-            if (!noteType.notes.ContainsKey(notePosition))
+            if (!noteType.notes.ContainsKey(noteTime))
             {
-                noteType.notes.Add(notePosition, new Note());
+                noteType.notes.Add(noteTime, new Note());
             }
 
             // Redraw the buttons
