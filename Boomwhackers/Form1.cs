@@ -13,7 +13,9 @@ namespace Boomwhackers
     public partial class Form1 : Form
     {
         BoomProject project;
+
         static string location = "C:\\Users\\anzeb\\TestBoomwhackers\\Test1";
+        
         OpenFileDialog openProjectDialog = new OpenFileDialog()
         {
             FileName = "Izberi projekt",
@@ -21,6 +23,7 @@ namespace Boomwhackers
             Title = "Odpri Boomwhackers projekt",
             InitialDirectory = location
         };
+
         public Form1()
         {
             InitializeComponent();
@@ -55,8 +58,20 @@ namespace Boomwhackers
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
-            Form form2 = new Form2();
+            Form2 form2 = new Form2();
+            form2.FormClosing += frm2_FormClosing;
             form2.Show();
+        }
+
+        private void frm2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BoomProject frm2Project = ((Form2)sender).project;
+
+            if (frm2Project != null)
+            {
+                project = frm2Project;
+                jsonData.Text = project.jsonData;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
