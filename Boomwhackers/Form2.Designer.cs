@@ -68,9 +68,9 @@
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(13, 217);
+            this.createButton.Location = new System.Drawing.Point(12, 206);
             this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(113, 23);
+            this.createButton.Size = new System.Drawing.Size(113, 25);
             this.createButton.TabIndex = 3;
             this.createButton.Text = "Ustvari projekt";
             this.createButton.UseVisualStyleBackColor = true;
@@ -107,6 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.folderBrowserButton);
             this.Controls.Add(this.projectRootTextBox);
