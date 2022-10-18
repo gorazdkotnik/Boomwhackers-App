@@ -8,6 +8,6 @@ namespace Boomwhackers
 {
     public class BoomData
     {
-        Dictionary<float, Note> notes = new Dictionary<float, Note>();
+        public List<NoteType> notes = new List<NoteType>();
     }
 }

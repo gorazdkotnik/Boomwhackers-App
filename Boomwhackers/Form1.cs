@@ -25,9 +25,18 @@ namespace Boomwhackers
         {
             InitializeComponent();
 
-            
+
             project = new BoomProject("testProject", location);
+
+            project.data.notes.Add(new NoteType("test", "red")
+            {
+                notes = new Dictionary<float, Note>()
+                {
+                    { 1.0f, new Note(1.0f) }
+                }
+            });
             jsonData.Text = project.jsonData;
+
         }
 
         private void SaveProject(object sender, EventArgs e)

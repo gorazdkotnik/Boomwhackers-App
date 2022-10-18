@@ -8,36 +8,16 @@ namespace Boomwhackers
 {
     public class NoteType
     {
-        private string displayName;
-        private string displayColor;
+        public string displayName;
+        public string displayColor;
 
-        private int noteValue;
+        public Dictionary<float, Note> notes = new Dictionary<float, Note>();
 
-        public NoteType(string displayName, string displayColor, int noteValue)
+        public NoteType(string displayName, string displayColor)
         {
             this.displayName = displayName;
             this.displayColor = displayColor;
-            this.noteValue = noteValue;
         }
 
-        public NoteType() : this("C", "White", 0) { }
-
-        public string DisplayName
-        {
-            get { return displayName; }
-            set { displayName = value; }
-        }
-
-        public string DisplayColor
-        {
-            get { return displayColor; }
-            set { displayColor = value; }
-        }
-
-        public int NoteValue
-        {
-            get { return noteValue; }
-            set { noteValue = value; }
-        }
     }
 }

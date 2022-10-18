@@ -8,37 +8,16 @@ namespace Boomwhackers
 {
     public class Note
     {
-        private NoteType noteType;
-        private float time;
-
-        public Note(NoteType noteType, float time)
+        public float length;
+        
+        public Note(float length = 1f)
         {
-            this.noteType = noteType;
-            this.time = time;
-        }
-
-        public Note() : this(new NoteType(), 0) { }
-
-        public NoteType NoteType
-        {
-            get { return noteType; }
-            set { noteType = value; }
-        }
-
-        public float Time
-        {
-            get { return time; }
-            set { time = value; }
-        }
-
-        public Note Clone()
-        {
-            return new Note(noteType, time);
+            this.length = length;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", noteType.DisplayName, time);
+            return string.Format("{0}", length.ToString());
         }
     }
 }
