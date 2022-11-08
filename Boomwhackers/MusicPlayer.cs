@@ -51,7 +51,7 @@ namespace Boomwhackers
             Button b = new Button();
             b.Location = new Point(x, musicPlayerPanel.Height - margin - rowHeight);
             b.Size = new Size(colWidth, rowHeight);
-            b.BackColor = Color.FromName(color);
+            b.BackColor = ColorTranslator.FromHtml(color);
             b.FlatStyle = FlatStyle.Flat;
             b.FlatAppearance.BorderSize = 0;
 
