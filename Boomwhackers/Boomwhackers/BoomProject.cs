@@ -70,11 +70,11 @@ namespace Boomwhackers
             {
                 throw new Exception("Invalid file extension");
             }
-
+            
             try
             {
                 File.WriteAllText(path, jsonData);
-
+                MessageBox.Show("Projekt je bil uspešno shranjen.", "Shranjevanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
