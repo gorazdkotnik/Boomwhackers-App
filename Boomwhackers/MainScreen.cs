@@ -79,5 +79,11 @@ namespace Boomwhackers
             Form editor = new Editor(project);
             editor.Show();
         }
+
+        private void openMusicPlayer_Click(object sender, EventArgs e)
+        {
+            Form musicPlayer = new MusicPlayer(project);
+            musicPlayer.Show();
+        }
     }
 }
