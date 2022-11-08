@@ -70,7 +70,7 @@ namespace Boomwhackers
             this.Controls.Add(this.EditorPanel);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Editor";
-            this.Text = "Editor";
+            this.Text = "Urejevalnik not";
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseClick);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
