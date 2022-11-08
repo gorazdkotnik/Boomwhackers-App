@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Boomwhackers
 {
-    public partial class UstvariProjekt : Form
+    public partial class CreateProject : Form
     {
         public BoomProject project { get; set; }
 
-        public UstvariProjekt()
+        public CreateProject()
         {
             InitializeComponent();
         }
