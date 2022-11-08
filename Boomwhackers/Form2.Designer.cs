@@ -117,7 +117,7 @@
             this.Controls.Add(this.projectNameTextBox);
             this.Controls.Add(this.formTitleLabel);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Ustvarjanje projekta";
             this.ResumeLayout(false);
             this.PerformLayout();
 

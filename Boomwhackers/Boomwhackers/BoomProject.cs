@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Boomwhackers
 {
@@ -70,7 +71,15 @@ namespace Boomwhackers
                 throw new Exception("Invalid file extension");
             }
 
-            File.WriteAllText(path, jsonData);
+            try
+            {
+                File.WriteAllText(path, jsonData);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
@@ -86,7 +95,9 @@ namespace Boomwhackers
             try
             {
                 JsonConvert.PopulateObject(loadData, this);
-            } catch {
+            }
+            catch
+            {
                 throw new InvalidDataException();
             }
         }

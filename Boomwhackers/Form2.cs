@@ -43,7 +43,7 @@ namespace Boomwhackers
                 MessageBox.Show("Pot do projekta ne sme biti prazna.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+
             try
             {
                 project = new BoomProject(projectName, projectRoot);
