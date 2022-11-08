@@ -35,9 +35,17 @@ namespace Boomwhackers
             RedrawButtons();
         }
 
+        public void AddControlToEditor(Control control)
+        {
+            EditorPanel.Controls.Add(control);
+
+            editorControls.Add(control);
+        }
+
         void RedrawButtons()
         {
-
+            // save scroll location
+            Point scroll = EditorPanel.AutoScrollPosition;
 
             // remove old 
             if (editorControls != null)
@@ -69,8 +77,7 @@ namespace Boomwhackers
                     BackColor = Color.FromName(noteType.displayColor)
                 };
 
-                editorControls.Add(typeLabel);
-                Controls.Add(typeLabel);
+                AddControlToEditor(typeLabel);
 
                 foreach (var note in noteType.notes)
                 {
@@ -90,8 +97,7 @@ namespace Boomwhackers
                         RedrawButtons();
                     };
 
-                    editorControls.Add(noteBtn);
-                    Controls.Add(noteBtn);
+                    AddControlToEditor(noteBtn);
                 }
 
                 row++;
@@ -112,16 +118,23 @@ namespace Boomwhackers
                 
             };
 
-            editorControls.Add(addNoteTypeBtn);
-            Controls.Add(addNoteTypeBtn);
+            AddControlToEditor(addNoteTypeBtn);
+
+            // restore scroll location
+            EditorPanel.AutoScrollPosition = new Point(-scroll.X, -scroll.Y);
+
         }
 
         private void Editor_MouseClick(object sender, MouseEventArgs e)
         {
             // Add note at click position in form
 
-            // Get the click position
-            Point clickPos = PointToClient(Cursor.Position);
+            // Get the click position inside editor control
+            Point clickPos = EditorPanel.PointToClient(Cursor.Position);
+
+            // add scroll
+            clickPos.X -= EditorPanel.AutoScrollPosition.X;
+            clickPos.Y -= EditorPanel.AutoScrollPosition.Y;
 
             statusLabel.Text = clickPos.ToString();
 

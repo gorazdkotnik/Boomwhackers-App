@@ -1,6 +1,6 @@
 ﻿namespace Boomwhackers
 {
-    partial class Form2
+    partial class UstvariProjekt
     {
         /// <summary>
         /// Required designer variable.

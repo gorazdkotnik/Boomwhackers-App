@@ -31,6 +31,7 @@ namespace Boomwhackers
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.EditorPanel = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,12 +51,23 @@ namespace Boomwhackers
             this.statusLabel.Size = new System.Drawing.Size(118, 17);
             this.statusLabel.Text = "toolStripStatusLabel1";
             // 
+            // EditorPanel
+            // 
+            this.EditorPanel.AutoScroll = true;
+            this.EditorPanel.AutoScrollMargin = new System.Drawing.Size(500, 50);
+            this.EditorPanel.Location = new System.Drawing.Point(12, 12);
+            this.EditorPanel.Name = "EditorPanel";
+            this.EditorPanel.Size = new System.Drawing.Size(776, 401);
+            this.EditorPanel.TabIndex = 1;
+            this.EditorPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseClick);
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.EditorPanel);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Editor";
             this.Text = "Editor";
@@ -71,5 +83,6 @@ namespace Boomwhackers
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.Panel EditorPanel;
     }
 }
