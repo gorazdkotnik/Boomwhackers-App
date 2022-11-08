@@ -58,14 +58,14 @@ namespace Boomwhackers
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
-            UstvariProjekt form2 = new UstvariProjekt();
+            CreateProject form2 = new CreateProject();
             form2.FormClosing += frm2_FormClosing;
             form2.Show();
         }
 
         private void frm2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BoomProject frm2Project = ((UstvariProjekt)sender).project;
+            BoomProject frm2Project = ((CreateProject)sender).project;
 
             if (frm2Project != null)
             {
