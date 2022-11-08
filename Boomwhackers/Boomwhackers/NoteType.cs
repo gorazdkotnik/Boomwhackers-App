@@ -19,5 +19,10 @@ namespace Boomwhackers
             this.displayColor = displayColor;
         }
 
+        public override string ToString()
+        {
+            return "NoteType[displayName=" + displayName + ", displayColor=" + displayColor + "]";
+        }
+
     }
 }

@@ -74,7 +74,7 @@ namespace Boomwhackers
                     Location = new Point(margin, (int)y),
                     Size = new Size(firstColumnWidth, rowHeight),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    BackColor = Color.FromName(noteType.displayColor)
+                    BackColor = ColorTranslator.FromHtml(noteType.displayColor)
                 };
 
                 AddControlToEditor(typeLabel);
@@ -83,15 +83,16 @@ namespace Boomwhackers
                 {
                     x = note.Key * colWidth + leftSideMargin;
 
-                    Button noteBtn = new Button()
+                    NoteButton noteBtn = new NoteButton()
                     {
                         Text = note.Value.ToString(),
                         Location = new Point((int)x, (int)y),
                         Size = new Size(colWidth, rowHeight),
-                        BackColor = Color.FromName(noteType.displayColor)
+                        BackColor = ColorTranslator.FromHtml(noteType.displayColor),
+                        TabStop = false,
                     };
 
-                    noteBtn.Click += (sender, e) =>
+                    noteBtn.MouseClick += (sender, e) =>
                     {
                         noteType.notes.Remove(note.Key);
                         RedrawButtons();
@@ -113,13 +114,14 @@ namespace Boomwhackers
                 BackColor = Color.LightGray
             };
 
-            addNoteTypeBtn.Click += (sender, e) =>
+            addNoteTypeBtn.MouseClick += (sender, e) =>
             {
                 AddNoteType addNoteTypeForm = new AddNoteType();
 
                 if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
                 {
                     openProject.data.notes.Add(addNoteTypeForm.noteType);
+                    //MessageBox.Show("Note type added: " + addNoteTypeForm.noteType.ToString());
                     RedrawButtons();
                 }
             };

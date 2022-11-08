@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Boomwhackers
 {
     public partial class AddNoteType : Form
     {
         public NoteType noteType;
+
         public AddNoteType()
         {
             InitializeComponent();
@@ -30,11 +32,17 @@ namespace Boomwhackers
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            // create note type
-            noteType = new NoteType(noteName.Text, ColorPicker.BackColor.Name);
+            // validate form
+            DialogResult = DialogResult.OK;
+            if (noteName.Text == "")
+            {
+                DialogResult = DialogResult.Cancel;
+            }
+            string hexColor = ColorTranslator.ToHtml(ColorPicker.BackColor);
 
-            // close form
-            this.Close();
+            noteType = new NoteType(noteName.Text, hexColor);
+
+            Close();
         }
     }
 }
