@@ -19,6 +19,9 @@ namespace Boomwhackers
         int margin = 10;
         int rowHeight = 50;
         int colWidth = 50;
+        
+        int buttonWidth = 45;
+        int buttonHeight = 45;
 
         int firstColumnWidth = 100;
 
@@ -87,7 +90,7 @@ namespace Boomwhackers
                     {
                         Text = note.Value.ToString(),
                         Location = new Point((int)x, (int)y),
-                        Size = new Size(colWidth, rowHeight),
+                        Size = new Size(buttonWidth, buttonHeight),
                         BackColor = ColorTranslator.FromHtml(noteType.displayColor),
                         TabStop = false,
                     };
