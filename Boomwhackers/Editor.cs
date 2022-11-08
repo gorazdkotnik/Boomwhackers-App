@@ -115,8 +115,15 @@ namespace Boomwhackers
 
             addNoteTypeBtn.Click += (sender, e) =>
             {
-                
+                AddNoteTypeForm addNoteTypeForm = new AddNoteTypeForm();
+
+                if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
+                {
+                    openProject.data.notes.Add(addNoteTypeForm.noteType);
+                    RedrawButtons();
+                }
             };
+        };
 
             AddControlToEditor(addNoteTypeBtn);
 
