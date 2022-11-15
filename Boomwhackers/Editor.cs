@@ -172,11 +172,11 @@ namespace Boomwhackers
             //MessageBox.Show("Obstaja? " + noteTime + " : " + noteType.notes.ContainsKey(noteTime));
 
             // Add the note to the project
-            if (noteType.notes.ContainsKey(noteTime))
+            if (noteType.notes.Contains(noteTime))
             {
                 noteType.notes.Remove(noteTime);
             } else {
-                noteType.notes.Add(noteTime, new Note());
+                noteType.notes.Add(noteTime);
             }
 
             // Redraw the buttons

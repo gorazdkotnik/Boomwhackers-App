@@ -33,9 +33,9 @@ namespace Boomwhackers
 
             project.data.notes.Add(new NoteType("test", "red")
             {
-                notes = new Dictionary<float, Note>()
+                notes = new List<float>()
                 {
-                    { 1.0f, new Note(1.0f) }
+                    1.0f
                 }
             });
             jsonData.Text = project.jsonData;
