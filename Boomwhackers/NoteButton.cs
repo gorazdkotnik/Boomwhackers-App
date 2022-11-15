@@ -10,17 +10,27 @@ using System.Windows.Forms;
 
 namespace Boomwhackers
 {
+    /* Non-focusable custom control */
     public partial class NoteButton : UserControl
     {
         public NoteButton()
         {
             InitializeComponent();
-
         }
-        public NoteButton(string color)
+
+        public NoteButton(IContainer container)
         {
+            container.Add(this);
+
             InitializeComponent();
-            this.BackColor = Color.FromName(color);
+        }
+
+        protected override bool ShowFocusCues
+        {
+            get
+            {
+                return false;
+            }
         }
     }
 }

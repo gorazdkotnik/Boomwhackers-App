@@ -19,6 +19,9 @@ namespace Boomwhackers
         int margin = 10;
         int rowHeight = 50;
         int colWidth = 50;
+        
+        int buttonWidth = 45;
+        int buttonHeight = 45;
 
         int firstColumnWidth = 100;
 
@@ -44,6 +47,7 @@ namespace Boomwhackers
 
         void RedrawButtons()
         {
+            this.SuspendLayout();
             // save scroll location
             Point scroll = EditorPanel.AutoScrollPosition;
 
@@ -87,16 +91,17 @@ namespace Boomwhackers
                     {
                         Text = note.Value.ToString(),
                         Location = new Point((int)x, (int)y),
-                        Size = new Size(colWidth, rowHeight),
+                        Size = new Size(buttonWidth, buttonHeight),
                         BackColor = ColorTranslator.FromHtml(noteType.displayColor),
                         TabStop = false,
+                        Enabled = false,
                     };
 
-                    noteBtn.MouseClick += (sender, e) =>
+                    /*noteBtn.MouseClick += (sender, e) =>
                     {
                         noteType.notes.Remove(note.Key);
                         RedrawButtons();
-                    };
+                    };*/
 
                     AddControlToEditor(noteBtn);
                 }
@@ -131,6 +136,8 @@ namespace Boomwhackers
             // restore scroll location
             EditorPanel.AutoScrollPosition = new Point(-scroll.X, -scroll.Y);
 
+            this.ResumeLayout();
+
         }
 
         private void Editor_MouseClick(object sender, MouseEventArgs e)
@@ -163,9 +170,13 @@ namespace Boomwhackers
 
             NoteType noteType = openProject.data.notes[noteTypeIndex];
 
+            //MessageBox.Show("Obstaja? " + noteTime + " : " + noteType.notes.ContainsKey(noteTime));
+
             // Add the note to the project
-            if (!noteType.notes.ContainsKey(noteTime))
+            if (noteType.notes.ContainsKey(noteTime))
             {
+                noteType.notes.Remove(noteTime);
+            } else {
                 noteType.notes.Add(noteTime, new Note());
             }
 
