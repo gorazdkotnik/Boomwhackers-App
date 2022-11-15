@@ -11,7 +11,7 @@ namespace Boomwhackers
         public string displayName;
         public string displayColor;
 
-        public Dictionary<float, Note> notes = new Dictionary<float, Note>();
+        public List<float> notes = new List<float>();
 
         public NoteType(string displayName, string displayColor)
         {

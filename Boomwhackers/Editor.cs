@@ -85,11 +85,10 @@ namespace Boomwhackers
 
                 foreach (var note in noteType.notes)
                 {
-                    x = note.Key * colWidth + leftSideMargin;
+                    x = note * colWidth + leftSideMargin;
 
                     NoteButton noteBtn = new NoteButton()
                     {
-                        Text = note.Value.ToString(),
                         Location = new Point((int)x, (int)y),
                         Size = new Size(buttonWidth, buttonHeight),
                         BackColor = ColorTranslator.FromHtml(noteType.displayColor),
