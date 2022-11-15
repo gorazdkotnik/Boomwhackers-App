@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Boomwhackers\BoomProject.cs" />
     <Compile Include="Boomwhackers\BoomData.cs" />
+    <Compile Include="Boomwhackers\CControlAnimator.cs" />
+    <Compile Include="Boomwhackers\IAnimator.cs" />
     <Compile Include="Boomwhackers\NoteType.cs" />
     <Compile Include="Editor.cs">
       <SubType>Form</SubType>
