@@ -41,15 +41,15 @@ namespace Boomwhackers
                     uniqueColors.Add(note.displayColor);
                 }
             }
-
+            
             return uniqueColors;
 
         }
 
-        Button CreateButton(int x, string color)
+        Button CreateButton(int x, int y, string color)
         {
             Button b = new Button();
-            b.Location = new Point(x, musicPlayerPanel.Height - margin - rowHeight);
+            b.Location = new Point(x, y);
             b.Size = new Size(colWidth, rowHeight);
             b.BackColor = ColorTranslator.FromHtml(color);
             b.FlatStyle = FlatStyle.Flat;
@@ -73,7 +73,7 @@ namespace Boomwhackers
             foreach (string color in noteDisplayColors)
             {
 
-                Button b = CreateButton(x, color);
+                Button b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, color);
                 musicPlayerPanel.Controls.Add(b);
 
 
@@ -84,11 +84,47 @@ namespace Boomwhackers
         private void playNotesButton_Click(object sender, EventArgs e)
         {
             /*
-             "notes":[{"displayName":"test","displayColor":"red","notes":{"1":{"length":1.0},"2":{"length":1.0},"3":{"length":1.0}}}]
+             "notes":[
+                {
+                    "displayName":"test",
+                    "displayColor":"red",
+                    "notes":{
+                        "1":{"length":1.0},
+                        "2":{"length":1.0},
+                        "3":{"length":1.0}
+                    }
+                }
+            ]
             */
+
+            List<Button> buttonsToPlay = new List<Button>();
+
             foreach (NoteType note in openProject.data.notes)
             {
+                int x = margin;
 
+                foreach (string color in noteDisplayColors)
+                {
+                    if (color == note.displayColor)
+                    {
+                        Button b = CreateButton(x, margin, color);
+                        buttonsToPlay.Add(b);
+                    }
+
+                    x += colWidth + margin;
+                }
+            }
+
+            // Play the buttons
+
+            foreach (Button b in buttonsToPlay)
+            {
+                musicPlayerPanel.Controls.Add(b);
+
+                CControlAnimator animator = new CControlAnimator(1, 1, new Point(0, musicPlayerPanel.Height - margin - rowHeight));
+                animator.control = b;
+
+                animator.Start();
             }
         }
 
