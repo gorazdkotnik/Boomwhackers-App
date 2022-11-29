@@ -15,7 +15,7 @@ namespace Boomwhackers
         BoomProject project;
 
         static string location = "C:\\Users\\anzeb\\TestBoomwhackers\\Test1";
-        
+
         OpenFileDialog openProjectDialog = new OpenFileDialog()
         {
             FileName = "Izberi projekt",
@@ -82,6 +82,14 @@ namespace Boomwhackers
 
         private void openMusicPlayer_Click(object sender, EventArgs e)
         {
+            if (project == null)
+            {
+                MessageBox.Show(
+                    "Da lahko dostopate do predvajalnika not morate odpreti ali ustvariti projekt.", 
+                    "Napaka pri odpiranju predvajalnika not", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Form musicPlayer = new MusicPlayer(project);
             musicPlayer.Show();
         }
