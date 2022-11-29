@@ -29,7 +29,7 @@ namespace Boomwhackers
             InitializeComponent();
 
 
-            project = new BoomProject("testProject", location);
+            /*project = new BoomProject("testProject", location);
 
             project.data.notes.Add(new NoteType("test", "red")
             {
@@ -38,7 +38,7 @@ namespace Boomwhackers
                     1.0f
                 }
             });
-            jsonData.Text = project.jsonData;
+            jsonData.Text = project.jsonData;*/
 
         }
 

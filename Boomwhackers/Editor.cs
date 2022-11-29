@@ -174,9 +174,9 @@ namespace Boomwhackers
             // Add the note to the project
             if (noteType.notes.Contains(noteTime))
             {
-                noteType.notes.Remove(noteTime);
+                noteType.RemoveNote(noteTime);
             } else {
-                noteType.notes.Add(noteTime);
+                noteType.AddNote(noteTime);
             }
 
             // Redraw the buttons
