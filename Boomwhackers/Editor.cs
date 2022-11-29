@@ -19,7 +19,7 @@ namespace Boomwhackers
         int margin = 10;
         int rowHeight = 50;
         int colWidth = 50;
-        
+
         int buttonWidth = 45;
         int buttonHeight = 45;
 
@@ -30,7 +30,7 @@ namespace Boomwhackers
         public Editor(BoomProject project)
         {
             leftSideMargin = firstColumnWidth + margin * 2;
-            
+
             openProject = project;
 
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace Boomwhackers
             }
 
             // add new
-            
+
             editorControls = new List<Control>();
 
             float x = margin + firstColumnWidth + margin;
@@ -175,7 +175,9 @@ namespace Boomwhackers
             if (noteType.notes.Contains(noteTime))
             {
                 noteType.RemoveNote(noteTime);
-            } else {
+            }
+            else
+            {
                 noteType.AddNote(noteTime);
             }
 
