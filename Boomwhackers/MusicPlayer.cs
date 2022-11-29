@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace Boomwhackers
 {
@@ -19,6 +20,8 @@ namespace Boomwhackers
         int colWidth = 50;
 
         List<string> noteDisplayColors;
+
+        Dispatcher d;
 
         public MusicPlayer(BoomProject project)
         {
@@ -81,56 +84,61 @@ namespace Boomwhackers
             }
         }
 
-        private void playNotesButton_Click(object sender, EventArgs e)
+        void PlayNotes()
         {
-            /*
-             "notes":[
-                {
-                    "displayName":"test",
-                    "displayColor":"red",
-                    "notes":{
-                        "1":{"length":1.0},
-                        "2":{"length":1.0},
-                        "3":{"length":1.0}
-                    }
-                }
-            ]
-            */
+            playNotesButton.Enabled = false;
 
-            List<Button> buttonsToPlay = new List<Button>();
-
+            // for each note type
             foreach (NoteType note in openProject.data.notes)
             {
-                int x = margin;
-
-                foreach (string color in noteDisplayColors)
+                // for each note in the note type
+                foreach (double noteTime in note.notes)
                 {
-                    if (color == note.displayColor)
-                    {
-                        Button b = CreateButton(x, margin, color);
-                        buttonsToPlay.Add(b);
-                    }
+                    // start the animation
+                    int delay = (int)(noteTime * 1000);
 
-                    x += colWidth + margin;
+                    d = Dispatcher.CurrentDispatcher;
+                    new Task(() => {
+                        System.Threading.Thread.Sleep(delay);
+
+                        d.BeginInvoke(new Action(() =>
+                        {
+                            // create a new button
+                            Button b = CreateButton(margin, margin, note.displayColor);
+                            // add the button to the panel
+                            musicPlayerPanel.Controls.Add(b);
+                            // create a new animator for the button
+                            CControlAnimator animator = new CControlAnimator(1, 1, new Point(b.Location.X, musicPlayerPanel.Height - margin - rowHeight));
+                            // set the button to be animated
+                            animator.control = b;
+
+                            animator.Start();
+                        }));
+                    }).Start();
                 }
             }
+        }
 
-            // Play the buttons
-
-            foreach (Button b in buttonsToPlay)
-            {
-                musicPlayerPanel.Controls.Add(b);
-
-                CControlAnimator animator = new CControlAnimator(1, 1, new Point(0, musicPlayerPanel.Height - margin - rowHeight));
-                animator.control = b;
-
-                animator.Start();
-            }
+        private void playNotesButton_Click(object sender, EventArgs e)
+        {
+            PlayNotes();
         }
 
         private void pauseNotesButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void restartNotesButton_Click(object sender, EventArgs e)
+        {
+            // remove all buttons from the panel
+            musicPlayerPanel.Controls.Clear();
+
+            // reset dispatcher
+            d = null;
+
+            DrawNoteTypes();
+            PlayNotes();
         }
     }
 }

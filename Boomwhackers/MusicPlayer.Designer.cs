@@ -84,6 +84,7 @@
             this.restartNotesButton.TabIndex = 3;
             this.restartNotesButton.Text = "Predvajaj od začetka";
             this.restartNotesButton.UseVisualStyleBackColor = true;
+            this.restartNotesButton.Click += new System.EventHandler(this.restartNotesButton_Click);
             // 
             // MusicPlayer
             // 
