@@ -19,8 +19,6 @@ namespace Boomwhackers
         int rowHeight = 50;
         int colWidth = 50;
 
-        List<string> noteDisplayColors;
-
         Dispatcher d;
 
         public MusicPlayer(BoomProject project)
@@ -30,23 +28,6 @@ namespace Boomwhackers
             InitializeComponent();
 
             DrawNoteTypes();
-        }
-
-        List<string> GetUniqueNoteColors()
-        {
-
-            List<string> uniqueColors = new List<string>();
-
-            foreach (NoteType note in openProject.data.notes)
-            {
-                if (!uniqueColors.Contains(note.displayColor))
-                {
-                    uniqueColors.Add(note.displayColor);
-                }
-            }
-            
-            return uniqueColors;
-
         }
 
         Button CreateButton(int x, int y, string color)
@@ -63,9 +44,8 @@ namespace Boomwhackers
 
         void DrawNoteTypes()
         {
-            noteDisplayColors = GetUniqueNoteColors();
 
-            if (noteDisplayColors.Count < 1)
+            if (openProject.data.notes.Count < 1)
             {
                 noDataLabel.Visible = true;
                 return;
@@ -73,10 +53,10 @@ namespace Boomwhackers
 
             int x = margin;
 
-            foreach (string color in noteDisplayColors)
+            foreach (NoteType noteType in openProject.data.notes)
             {
 
-                Button b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, color);
+                Button b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, noteType.displayColor);
                 musicPlayerPanel.Controls.Add(b);
 
 
@@ -88,23 +68,31 @@ namespace Boomwhackers
         {
             playNotesButton.Enabled = false;
 
+            int noteTypeIndex = 0;
             // for each note type
-            foreach (NoteType note in openProject.data.notes)
+            foreach (NoteType noteType in openProject.data.notes)
             {
-                // for each note in the note type
-                foreach (double noteTime in note.notes)
-                {
-                    // start the animation
-                    int delay = (int)(noteTime * 1000);
 
-                    d = Dispatcher.CurrentDispatcher;
-                    new Task(() => {
+
+                d = Dispatcher.CurrentDispatcher;
+                new Task(() =>
+                {
+                    // for each note in the note type
+                    foreach (double noteTime in noteType.notes)
+                    {
+                        // start the animation
+                        int delay = (int)(noteTime * 1000);
+                        //MessageBox.Show("in: " + noteTypeIndex.ToString() + " " + noteType.displayColor);
+
+                        //MessageBox.Show("task: " + noteTypeIndex.ToString() + " " + noteType.displayColor);
                         System.Threading.Thread.Sleep(delay);
 
                         d.BeginInvoke(new Action(() =>
                         {
+                            //MessageBox.Show("action: " + noteTypeIndex.ToString());
+
                             // create a new button
-                            Button b = CreateButton(margin, margin, note.displayColor);
+                            Button b = CreateButton((colWidth * noteTypeIndex), margin, noteType.displayColor);
                             // add the button to the panel
                             musicPlayerPanel.Controls.Add(b);
                             // create a new animator for the button
@@ -114,8 +102,10 @@ namespace Boomwhackers
 
                             animator.Start();
                         }));
-                    }).Start();
-                }
+                    }
+                }).Start();
+
+                noteTypeIndex++;
             }
         }
 

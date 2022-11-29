@@ -37,6 +37,9 @@ namespace Boomwhackers
         }
 
         [JsonIgnore]
+        public bool madeChanges = false;
+
+        [JsonIgnore]
         public string jsonData
         {
             get

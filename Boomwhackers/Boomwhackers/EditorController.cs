@@ -61,6 +61,13 @@ namespace Boomwhackers
         public void Unload()
         {
             ClearButtons();
+
+            containerPanel.MouseClick -= Editor_MouseClick;
+        }
+
+        void ChangeMade()
+        {
+            openProject.madeChanges = true;
         }
 
         void RedrawButtons()
@@ -139,6 +146,8 @@ namespace Boomwhackers
                     openProject.data.notes.Add(addNoteTypeForm.noteType);
                     //MessageBox.Show("Note type added: " + addNoteTypeForm.noteType.ToString());
                     RedrawButtons();
+
+                    ChangeMade();
                 }
             };
 
@@ -191,6 +200,8 @@ namespace Boomwhackers
             {
                 noteType.AddNote(noteTime);
             }
+
+            ChangeMade();
 
             // Redraw the buttons
             RedrawButtons();

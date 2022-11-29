@@ -26,6 +26,14 @@ namespace Boomwhackers
             InitialDirectory = location
         };
 
+        SaveFileDialog saveProjectDialog = new SaveFileDialog()
+        {
+            Title = "Izberi, kam shraniti projekt",
+            InitialDirectory = location,
+            AddExtension = true,
+            Filter = BoomProject.filter,
+        };
+
         public Form1()
         {
             InitializeComponent();
@@ -41,7 +49,6 @@ namespace Boomwhackers
                 }
             });
             jsonData.Text = project.jsonData;*/
-
         }
 
         private void InitializeEditor()
@@ -53,17 +60,25 @@ namespace Boomwhackers
             currentEditorController = new EditorController(editorPanel, loadedProject);
         }
 
-        public void SaveProject()
+        void SaveProject()
         {
             if (loadedProjectLocation != null)
             {
                 loadedProject.SaveData(loadedProjectLocation);
             }
+            else
+            {
+                SaveProjectAs();
+            }
         }
 
-        public void SaveProject(string location)
+        void SaveProjectAs()
         {
-            loadedProject.SaveData(location);
+            if (saveProjectDialog.ShowDialog() == DialogResult.OK)
+            {
+                loadedProject.SaveData(saveProjectDialog.FileName);
+                loadedProjectLocation = saveProjectDialog.FileName;
+            }
         }
 
 
@@ -112,7 +127,18 @@ namespace Boomwhackers
         private void NewProjectItem_Click(object sender, EventArgs e)
         {
             loadedProject = new BoomProject();
+            loadedProjectLocation = null;
             InitializeEditor();
+        }
+
+        private void SaveProjectItem_Click(object sender, EventArgs e)
+        {
+            SaveProject();
+        }
+
+        private void SaveProjectAsItem_Click(object sender, EventArgs e)
+        {
+            SaveProjectAs();
         }
     }
 }

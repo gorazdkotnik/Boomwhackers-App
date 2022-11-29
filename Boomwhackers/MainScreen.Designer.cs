@@ -80,12 +80,14 @@
             this.SaveProjectItem.Name = "SaveProjectItem";
             this.SaveProjectItem.Size = new System.Drawing.Size(180, 22);
             this.SaveProjectItem.Text = "Shrani projekt";
+            this.SaveProjectItem.Click += new System.EventHandler(this.SaveProjectItem_Click);
             // 
             // SaveProjectAsItem
             // 
             this.SaveProjectAsItem.Name = "SaveProjectAsItem";
             this.SaveProjectAsItem.Size = new System.Drawing.Size(180, 22);
             this.SaveProjectAsItem.Text = "Shrani projekt kot...";
+            this.SaveProjectAsItem.Click += new System.EventHandler(this.SaveProjectAsItem_Click);
             // 
             // editorPanel
             // 
