@@ -52,13 +52,14 @@
     <Compile Include="Boomwhackers\BoomProject.cs" />
     <Compile Include="Boomwhackers\BoomData.cs" />
     <Compile Include="Boomwhackers\CControlAnimator.cs" />
+    <Compile Include="Boomwhackers\EditorController.cs" />
     <Compile Include="Boomwhackers\IAnimator.cs" />
     <Compile Include="Boomwhackers\NoteType.cs" />
-    <Compile Include="Editor.cs">
+    <Compile Include="EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor.Designer.cs">
-      <DependentUpon>Editor.cs</DependentUpon>
+    <Compile Include="EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicPlayer.cs">
       <SubType>Form</SubType>
@@ -92,8 +93,8 @@
     <Compile Include="NoteButton.Designer.cs">
       <DependentUpon>NoteButton.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Editor.resx">
-      <DependentUpon>Editor.cs</DependentUpon>
+    <EmbeddedResource Include="EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddNoteType.resx">
       <DependentUpon>AddNoteType.cs</DependentUpon>

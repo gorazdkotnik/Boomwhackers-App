@@ -27,9 +27,13 @@ namespace Boomwhackers
 
         public BoomData data = new BoomData();
 
-        public BoomProject(string loadFile)
+        public BoomProject()
         {
-            LoadData(loadFile);
+        }
+
+        public BoomProject(string location)
+        {
+            this.LoadData(location);
         }
 
         [JsonIgnore]
@@ -41,13 +45,8 @@ namespace Boomwhackers
             }
         }
 
-        public void SaveData(string path = null)
+        public void SaveData(string path)
         {
-            if (path == null)
-            {
-                path = DefaultLocation();
-            }
-
             if (!VerifyExtension(path))
             {
                 throw new Exception("Invalid file extension");

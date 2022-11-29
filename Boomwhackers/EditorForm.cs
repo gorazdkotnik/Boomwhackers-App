@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Boomwhackers
 {
-    public partial class Editor : Form
+    public partial class EditorForm : Form
     {
         BoomProject openProject;
 
@@ -27,7 +27,7 @@ namespace Boomwhackers
 
         int leftSideMargin;
 
-        public Editor(BoomProject project)
+        public EditorForm(BoomProject project)
         {
             leftSideMargin = firstColumnWidth + margin * 2;
 

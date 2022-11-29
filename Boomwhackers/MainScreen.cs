@@ -12,7 +12,9 @@ namespace Boomwhackers
 {
     public partial class Form1 : Form
     {
-        BoomProject project;
+        BoomProject loadedProject;
+        string loadedProjectLocation = null;
+        EditorController currentEditorController;
 
         static string location = "C:\\Users\\anzeb\\TestBoomwhackers\\Test1";
 
@@ -42,17 +44,37 @@ namespace Boomwhackers
 
         }
 
-        private void SaveProject(object sender, EventArgs e)
+        private void InitializeEditor()
         {
-            project.SaveData();
+            if (currentEditorController != null)
+            {
+                currentEditorController.Unload();
+            }
+            currentEditorController = new EditorController(editorPanel, loadedProject);
         }
+
+        public void SaveProject()
+        {
+            if (loadedProjectLocation != null)
+            {
+                loadedProject.SaveData(loadedProjectLocation);
+            }
+        }
+
+        public void SaveProject(string location)
+        {
+            loadedProject.SaveData(location);
+        }
+
 
         private void LoadProject(object sender, EventArgs e)
         {
             if (openProjectDialog.ShowDialog() == DialogResult.OK)
             {
-                project = new BoomProject(openProjectDialog.FileName);
-                jsonData.Text = project.jsonData;
+                loadedProject = new BoomProject(openProjectDialog.FileName);
+                loadedProjectLocation = openProjectDialog.FileName;
+
+                InitializeEditor();
             }
         }
 
@@ -69,29 +91,28 @@ namespace Boomwhackers
 
             if (frm2Project != null)
             {
-                project = frm2Project;
-                jsonData.Text = project.jsonData;
+                loadedProject = frm2Project;
             }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Form editor = new Editor(project);
-            editor.Show();
         }
 
         private void openMusicPlayer_Click(object sender, EventArgs e)
         {
-            if (project == null)
+            if (loadedProject == null)
             {
                 MessageBox.Show(
-                    "Da lahko dostopate do predvajalnika not morate odpreti ali ustvariti projekt.", 
+                    "Da lahko dostopate do predvajalnika not morate odpreti ali ustvariti projekt.",
                     "Napaka pri odpiranju predvajalnika not", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            Form musicPlayer = new MusicPlayer(project);
+            Form musicPlayer = new MusicPlayer(loadedProject);
             musicPlayer.Show();
+        }
+
+        private void NewProjectItem_Click(object sender, EventArgs e)
+        {
+            loadedProject = new BoomProject();
+            InitializeEditor();
         }
     }
 }
