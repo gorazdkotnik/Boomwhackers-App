@@ -26,28 +26,10 @@ namespace Boomwhackers
         public string projectName;
 
         public BoomData data = new BoomData();
-        public string projectRoot;
-
-        public BoomProject(string projectName, string projectRoot)
-        {
-            this.projectName = projectName;
-            this.projectRoot = projectRoot;
-        }
 
         public BoomProject(string loadFile)
         {
             LoadData(loadFile);
-        }
-
-        public string DefaultLocation()
-        {
-            string path = Path.Combine(projectRoot, projectName);
-            return Path.ChangeExtension(path, extension);
-        }
-
-        public void SaveData()
-        {
-            SaveData(DefaultLocation());
         }
 
         [JsonIgnore]

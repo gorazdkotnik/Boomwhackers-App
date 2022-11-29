@@ -46,8 +46,8 @@ namespace Boomwhackers
 
             try
             {
-                project = new BoomProject(projectName, projectRoot);
-                project.SaveData();
+                project = new BoomProject(projectName);
+                project.SaveData(projectRoot);
 
                 this.Close();
             }
