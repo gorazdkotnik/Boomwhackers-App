@@ -13,21 +13,21 @@ namespace Boomwhackers
         public Control control { get; set; }
         private Timer timer;
 
-        private int moveSpeed;
-        private int animateSpeed;
+        private int moveAmount;
+        private int animateInterval;
         
         private Point destroyLocation;
         // Data needed for animation
 
-        public CControlAnimator(int moveSpeed, int animateSpeed, Point destroyLocation)
+        public CControlAnimator(int moveAmount, int animateInterval, Point destroyLocation)
         {
-            this.moveSpeed = moveSpeed;
+            this.moveAmount = moveAmount;
             this.destroyLocation = destroyLocation;
-            this.animateSpeed = animateSpeed;
+            this.animateInterval = animateInterval;
             
             timer = new Timer();
             timer.Tick += TimerTick;
-            timer.Interval = this.animateSpeed;
+            timer.Interval = this.animateInterval;
         }
 
         public CControlAnimator(int moveSpeed, int animateSpeed) : this(moveSpeed, animateSpeed, new Point(-1, -1)) { }
@@ -56,7 +56,7 @@ namespace Boomwhackers
                 }
                 else
                 {
-                    control.Location = new Point(control.Location.X, control.Location.Y + moveSpeed);
+                    control.Location = new Point(control.Location.X, control.Location.Y + moveAmount);
                 }
             }
         }

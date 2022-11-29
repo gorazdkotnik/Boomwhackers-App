@@ -70,41 +70,41 @@ namespace Boomwhackers
 
             int noteTypeIndex = 0;
             // for each note type
-            foreach (NoteType noteType in openProject.data.notes)
+            foreach (NoteType note in openProject.data.notes)
             {
-
-
-                d = Dispatcher.CurrentDispatcher;
-                new Task(() =>
+                // for each note in the note type
+                foreach (double noteTime in note.notes)
                 {
-                    // for each note in the note type
-                    foreach (double noteTime in noteType.notes)
-                    {
-                        // start the animation
-                        int delay = (int)(noteTime * 1000);
-                        //MessageBox.Show("in: " + noteTypeIndex.ToString() + " " + noteType.displayColor);
+                    // start the animation
+                    int delay = (int)(noteTime * 1000);
 
-                        //MessageBox.Show("task: " + noteTypeIndex.ToString() + " " + noteType.displayColor);
+                    // create a new button
+                    Button b = CreateButton(margin + (noteTypeIndex * (margin + colWidth)), margin, note.displayColor);
+                    // add the button to the panel
+                    musicPlayerPanel.Controls.Add(b);
+
+                    b.Enabled = false;
+
+                    b.Hide();
+
+
+                    d = Dispatcher.CurrentDispatcher;
+                    new Task(() => {
                         System.Threading.Thread.Sleep(delay);
 
                         d.BeginInvoke(new Action(() =>
                         {
-                            //MessageBox.Show("action: " + noteTypeIndex.ToString());
-
-                            // create a new button
-                            Button b = CreateButton((colWidth * noteTypeIndex), margin, noteType.displayColor);
-                            // add the button to the panel
-                            musicPlayerPanel.Controls.Add(b);
                             // create a new animator for the button
                             CControlAnimator animator = new CControlAnimator(1, 1, new Point(b.Location.X, musicPlayerPanel.Height - margin - rowHeight));
                             // set the button to be animated
                             animator.control = b;
 
+                            b.Show();
+
                             animator.Start();
                         }));
-                    }
-                }).Start();
-
+                    }).Start();
+                }
                 noteTypeIndex++;
             }
         }
