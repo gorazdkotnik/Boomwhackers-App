@@ -35,14 +35,17 @@
             this.stopButton = new System.Windows.Forms.Button();
             this.noteTimer = new System.Windows.Forms.Timer(this.components);
             this.pauseButton = new System.Windows.Forms.Button();
+            this.BPMLabel = new System.Windows.Forms.Label();
+            this.BPMInput = new System.Windows.Forms.NumericUpDown();
             this.musicPlayerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BPMInput)).BeginInit();
             this.SuspendLayout();
             // 
             // musicPlayerPanel
             // 
             this.musicPlayerPanel.Controls.Add(this.noDataLabel);
             this.musicPlayerPanel.Location = new System.Drawing.Point(9, 56);
-            this.musicPlayerPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.musicPlayerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.musicPlayerPanel.Name = "musicPlayerPanel";
             this.musicPlayerPanel.Size = new System.Drawing.Size(582, 300);
             this.musicPlayerPanel.TabIndex = 0;
@@ -62,7 +65,7 @@
             // playButton
             // 
             this.playButton.Location = new System.Drawing.Point(9, 11);
-            this.playButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.playButton.Margin = new System.Windows.Forms.Padding(2);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(49, 27);
             this.playButton.TabIndex = 1;
@@ -73,7 +76,7 @@
             // stopButton
             // 
             this.stopButton.Location = new System.Drawing.Point(112, 11);
-            this.stopButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stopButton.Margin = new System.Windows.Forms.Padding(2);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(54, 27);
             this.stopButton.TabIndex = 2;
@@ -97,21 +100,47 @@
             this.pauseButton.UseVisualStyleBackColor = true;
             this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
             // 
+            // BPMLabel
+            // 
+            this.BPMLabel.AutoSize = true;
+            this.BPMLabel.Location = new System.Drawing.Point(508, 18);
+            this.BPMLabel.Name = "BPMLabel";
+            this.BPMLabel.Size = new System.Drawing.Size(30, 13);
+            this.BPMLabel.TabIndex = 5;
+            this.BPMLabel.Text = "BPM";
+            // 
+            // BPMInput
+            // 
+            this.BPMInput.Location = new System.Drawing.Point(544, 16);
+            this.BPMInput.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.BPMInput.Name = "BPMInput";
+            this.BPMInput.Size = new System.Drawing.Size(44, 20);
+            this.BPMInput.TabIndex = 7;
+            this.BPMInput.ValueChanged += new System.EventHandler(this.BPMInput_ValueChanged);
+            // 
             // MusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.BPMInput);
+            this.Controls.Add(this.BPMLabel);
             this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.musicPlayerPanel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MusicPlayer";
             this.Text = "Predvajalnik not";
             this.musicPlayerPanel.ResumeLayout(false);
             this.musicPlayerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BPMInput)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -123,5 +152,7 @@
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Timer noteTimer;
         private System.Windows.Forms.Button pauseButton;
+        private System.Windows.Forms.Label BPMLabel;
+        private System.Windows.Forms.NumericUpDown BPMInput;
     }
 }

@@ -20,16 +20,17 @@ namespace Boomwhackers
         int rowHeight = 50;
         int colWidth = 50;
 
-        float startPlayTime = 0;
-        float pausedTime = 0;
+        int startPlayTime = 0;
+        int pausedTime = 0;
         bool paused = false;
-        float lastTickTime = 0;
+        int lastTickTime = -1;
 
-        float playSpeedBpm = 60;
+        float playSpeedBpm = 160;
 
         int removedNotes = 0; // To keep track of how many notes have finished playing
 
         List<NoteButton> displayedNotes = new List<NoteButton>();
+        Dictionary<int, NoteButton> noteTypeButtons = new Dictionary<int, NoteButton>();
 
         public MusicPlayer(BoomProject project)
         {
@@ -38,15 +39,19 @@ namespace Boomwhackers
             InitializeComponent();
 
             ResetPlayer();
+
+            BPMInput.Text = playSpeedBpm.ToString();
         }
 
-        NoteButton CreateButton(int x, int y, string color)
+        NoteButton CreateButton(int x, int y, string color, int noteTypeIndex)
         {
             NoteButton b = new NoteButton();
             b.Location = new Point(x, y);
             b.Size = new Size(colWidth, rowHeight);
             b.BackColor = ColorTranslator.FromHtml(color);
             b.Enabled = false;
+
+            b.noteTypeIndex = noteTypeIndex;
 
             return b;
         }
@@ -60,15 +65,18 @@ namespace Boomwhackers
             }
 
             int x = margin;
+            int noteTypeIndex = 0;
 
             foreach (NoteType noteType in openProject.data.notes)
             {
 
-                NoteButton b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, noteType.displayColor);
+                NoteButton b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, noteType.displayColor, noteTypeIndex);
                 musicPlayerPanel.Controls.Add(b);
 
+                noteTypeButtons.Add(noteTypeIndex, b);
 
                 x += colWidth + margin;
+                noteTypeIndex++;
             }
         }
 
@@ -81,10 +89,18 @@ namespace Boomwhackers
 
             displayedNotes.Clear();
 
+            // Clear old note types
+            foreach (NoteButton b in noteTypeButtons.Values)
+            {
+                b.Dispose();
+            }
+
+            noteTypeButtons.Clear();
+
             DrawNoteTypes();
 
             startPlayTime = 0;
-            lastTickTime = 0;
+            lastTickTime = -1;
         }
 
         // use Environment.TickCount for time
@@ -99,6 +115,7 @@ namespace Boomwhackers
             }
             else
             {
+                ResetPlayer();
                 startPlayTime = Environment.TickCount;
             }
 
@@ -125,8 +142,6 @@ namespace Boomwhackers
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            ResetPlayer();
-
             playButton.Enabled = true;
             pauseButton.Enabled = false;
             stopButton.Enabled = false;
@@ -139,6 +154,7 @@ namespace Boomwhackers
         // TODO: display only one notebutton per note
         private void noteTimer_Tick(object sender, EventArgs e)
         {
+            int thisTime = Environment.TickCount - startPlayTime;
             int notesCount = 0;
 
             // Add new notes
@@ -150,11 +166,20 @@ namespace Boomwhackers
                     notesCount++;
 
                     float noteTime = noteBeat * (60000 / playSpeedBpm);
-                    if (noteTime > lastTickTime && noteTime <= Environment.TickCount - startPlayTime)
+                    if (noteTime > lastTickTime && noteTime <= thisTime)
                     {
-                        NoteButton b = CreateButton(margin + noteTypeIndex * (colWidth + margin), margin, noteType.displayColor);
+                        NoteButton b = CreateButton(
+                            margin + noteTypeIndex * (colWidth + margin),
+                            margin,
+                            noteType.displayColor,
+                            noteTypeIndex
+                            );
+
+
                         musicPlayerPanel.Controls.Add(b);
                         displayedNotes.Add(b);
+
+                        //b.BringToFront();
                     }
                 }
 
@@ -171,21 +196,34 @@ namespace Boomwhackers
                 if (b.Location.Y >= musicPlayerPanel.Height - margin - rowHeight)
                 {
                     notesToRemove.Add(b);
-
-                    removedNotes++;
                 }
             }
 
+            foreach (NoteButton b in notesToRemove)
+            {
+                displayedNotes.Remove(b);
+                b.Dispose();
 
+                removedNotes++;
+
+                // Animate this noteTypeButton
+                NoteButton noteTypeButton = noteTypeButtons[b.noteTypeIndex];
+                noteTypeButton.Animate();
+            }
+
+            //Console.WriteLine(removedNotes.ToString() + "/" + notesCount.ToString());
             // Check if done
             if (removedNotes >= notesCount)
             {
-                MessageBox.Show(removedNotes.ToString() + "/" + notesCount.ToString());
-
                 stopButton_Click(null, null);
             }
 
-            lastTickTime = Environment.TickCount - startPlayTime;
+            lastTickTime = thisTime;
+        }
+
+        private void BPMInput_ValueChanged(object sender, EventArgs e)
+        {
+            playSpeedBpm = (float)BPMInput.Value;
         }
     }
 }
