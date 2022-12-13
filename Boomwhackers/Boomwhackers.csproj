@@ -88,6 +88,12 @@
     <Compile Include="NoteButton.Designer.cs">
       <DependentUpon>NoteButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="StartingScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartingScreen.Designer.cs">
+      <DependentUpon>StartingScreen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddNoteType.resx">
       <DependentUpon>AddNoteType.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +118,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StartingScreen.resx">
+      <DependentUpon>StartingScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

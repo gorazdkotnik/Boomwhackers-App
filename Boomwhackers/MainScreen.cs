@@ -37,6 +37,7 @@ namespace Boomwhackers
         public Form1()
         {
             InitializeComponent();
+            InitializeStartingScreen();
 
 
             /*project = new BoomProject("testProject", location);
@@ -58,6 +59,12 @@ namespace Boomwhackers
                 currentEditorController.Unload();
             }
             currentEditorController = new EditorController(editorPanel, loadedProject);
+        }
+
+        private void InitializeStartingScreen()
+        {
+            StartingScreen startingSccreen = new StartingScreen();
+            startingSccreen.Show();
         }
 
         void SaveProject()
