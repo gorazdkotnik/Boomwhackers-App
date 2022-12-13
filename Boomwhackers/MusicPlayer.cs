@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,16 @@ namespace Boomwhackers
         int rowHeight = 50;
         int colWidth = 50;
 
-        Dispatcher d;
+        float startPlayTime = 0;
+        float pausedTime = 0;
+        bool paused = false;
+        float lastTickTime = 0;
+
+        float playSpeedBpm = 60;
+
+        int removedNotes = 0; // To keep track of how many notes have finished playing
+
+        List<NoteButton> displayedNotes = new List<NoteButton>();
 
         public MusicPlayer(BoomProject project)
         {
@@ -27,24 +37,22 @@ namespace Boomwhackers
 
             InitializeComponent();
 
-            DrawNoteTypes();
+            ResetPlayer();
         }
 
-        Button CreateButton(int x, int y, string color)
+        NoteButton CreateButton(int x, int y, string color)
         {
-            Button b = new Button();
+            NoteButton b = new NoteButton();
             b.Location = new Point(x, y);
             b.Size = new Size(colWidth, rowHeight);
             b.BackColor = ColorTranslator.FromHtml(color);
-            b.FlatStyle = FlatStyle.Flat;
-            b.FlatAppearance.BorderSize = 0;
+            b.Enabled = false;
 
             return b;
         }
 
         void DrawNoteTypes()
         {
-
             if (openProject.data.notes.Count < 1)
             {
                 noDataLabel.Visible = true;
@@ -56,7 +64,7 @@ namespace Boomwhackers
             foreach (NoteType noteType in openProject.data.notes)
             {
 
-                Button b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, noteType.displayColor);
+                NoteButton b = CreateButton(x, musicPlayerPanel.Height - margin - rowHeight, noteType.displayColor);
                 musicPlayerPanel.Controls.Add(b);
 
 
@@ -64,71 +72,120 @@ namespace Boomwhackers
             }
         }
 
-        void PlayNotes()
+        void ResetPlayer()
         {
-            playNotesButton.Enabled = false;
-
-            int noteTypeIndex = 0;
-            // for each note type
-            foreach (NoteType note in openProject.data.notes)
+            foreach (NoteButton b in displayedNotes)
             {
-                // for each note in the note type
-                foreach (double noteTime in note.notes)
-                {
-                    // start the animation
-                    int delay = (int)(noteTime * 1000);
-
-                    // create a new button
-                    Button b = CreateButton(margin + (noteTypeIndex * (margin + colWidth)), margin, note.displayColor);
-                    // add the button to the panel
-                    musicPlayerPanel.Controls.Add(b);
-
-                    b.Enabled = false;
-
-                    b.Hide();
-
-
-                    d = Dispatcher.CurrentDispatcher;
-                    new Task(() => {
-                        System.Threading.Thread.Sleep(delay);
-
-                        d.BeginInvoke(new Action(() =>
-                        {
-                            // create a new animator for the button
-                            CControlAnimator animator = new CControlAnimator(1, 1, new Point(b.Location.X, musicPlayerPanel.Height - margin - rowHeight));
-                            // set the button to be animated
-                            animator.control = b;
-
-                            b.Show();
-
-                            animator.Start();
-                        }));
-                    }).Start();
-                }
-                noteTypeIndex++;
+                b.Dispose();
             }
-        }
 
-        private void playNotesButton_Click(object sender, EventArgs e)
-        {
-            PlayNotes();
-        }
-
-        private void pauseNotesButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void restartNotesButton_Click(object sender, EventArgs e)
-        {
-            // remove all buttons from the panel
-            musicPlayerPanel.Controls.Clear();
-
-            // reset dispatcher
-            d = null;
+            displayedNotes.Clear();
 
             DrawNoteTypes();
-            PlayNotes();
+
+            startPlayTime = 0;
+            lastTickTime = 0;
+        }
+
+        // use Environment.TickCount for time
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            if (paused)
+            {
+                paused = false;
+                startPlayTime = startPlayTime + (Environment.TickCount - pausedTime);
+                lastTickTime = Environment.TickCount - startPlayTime;
+            }
+            else
+            {
+                startPlayTime = Environment.TickCount;
+            }
+
+            playButton.Enabled = false;
+            pauseButton.Enabled = true;
+            stopButton.Enabled = true;
+
+            noteTimer.Start();
+
+            removedNotes = 0;
+        }
+
+        private void pauseButton_Click(object sender, EventArgs e)
+        {
+            paused = true;
+            pausedTime = Environment.TickCount;
+
+            playButton.Enabled = true;
+            pauseButton.Enabled = false;
+            stopButton.Enabled = true;
+
+            noteTimer.Stop();
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            ResetPlayer();
+
+            playButton.Enabled = true;
+            pauseButton.Enabled = false;
+            stopButton.Enabled = false;
+
+            noteTimer.Stop();
+
+            removedNotes = 0;
+        }
+
+        // TODO: display only one notebutton per note
+        private void noteTimer_Tick(object sender, EventArgs e)
+        {
+            int notesCount = 0;
+
+            // Add new notes
+            int noteTypeIndex = 0;
+            foreach (NoteType noteType in openProject.data.notes)
+            {
+                foreach (float noteBeat in noteType.notes)
+                {
+                    notesCount++;
+
+                    float noteTime = noteBeat * (60000 / playSpeedBpm);
+                    if (noteTime > lastTickTime && noteTime <= Environment.TickCount - startPlayTime)
+                    {
+                        NoteButton b = CreateButton(margin + noteTypeIndex * (colWidth + margin), margin, noteType.displayColor);
+                        musicPlayerPanel.Controls.Add(b);
+                        displayedNotes.Add(b);
+                    }
+                }
+
+                noteTypeIndex++;
+            }
+
+
+            // Move displayed notes and remove old ones
+            List<NoteButton> notesToRemove = new List<NoteButton>();
+            foreach (NoteButton b in displayedNotes)
+            {
+                b.Location = new Point(b.Location.X, b.Location.Y + 5);
+
+                if (b.Location.Y >= musicPlayerPanel.Height - margin - rowHeight)
+                {
+                    notesToRemove.Add(b);
+
+                    removedNotes++;
+                }
+            }
+
+
+            // Check if done
+            if (removedNotes >= notesCount)
+            {
+                MessageBox.Show(removedNotes.ToString() + "/" + notesCount.ToString());
+
+                stopButton_Click(null, null);
+            }
+
+            lastTickTime = Environment.TickCount - startPlayTime;
         }
     }
 }
