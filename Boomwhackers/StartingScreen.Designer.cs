@@ -63,6 +63,7 @@
             this.createProjectButton.TabIndex = 2;
             this.createProjectButton.Text = "Ustvari nov projekt";
             this.createProjectButton.UseVisualStyleBackColor = true;
+            this.createProjectButton.Click += new System.EventHandler(this.createProjectButton_Click);
             // 
             // recentProjectsLabel
             // 

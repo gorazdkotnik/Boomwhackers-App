@@ -60,10 +60,10 @@ namespace Boomwhackers
             }
             currentEditorController = new EditorController(editorPanel, loadedProject);
         }
-
+        
         private void InitializeStartingScreen()
         {
-            StartingScreen startingSccreen = new StartingScreen();
+            StartingScreen startingSccreen = new StartingScreen(this);
             startingSccreen.Show();
         }
 
@@ -100,7 +100,7 @@ namespace Boomwhackers
             }
         }
 
-        private void createProjectButton_Click(object sender, EventArgs e)
+        public void createProjectButton_Click(object sender, EventArgs e)
         {
             CreateProject form2 = new CreateProject();
             form2.FormClosing += frm2_FormClosing;
@@ -114,6 +114,7 @@ namespace Boomwhackers
             if (frm2Project != null)
             {
                 loadedProject = frm2Project;
+                InitializeEditor();
             }
         }
 
