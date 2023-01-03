@@ -29,5 +29,10 @@ namespace Boomwhackers
         {
             mainScreen.createProjectButton_Click(sender, e);
         }
+        
+        private void openProjectButton_Click(object sender, EventArgs e)
+        {
+            mainScreen.LoadProject(sender, e);
+        }
     }
 }

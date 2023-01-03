@@ -54,6 +54,7 @@
             this.openProjectButton.TabIndex = 1;
             this.openProjectButton.Text = "Odpri nov projekt";
             this.openProjectButton.UseVisualStyleBackColor = true;
+            this.openProjectButton.Click += new System.EventHandler(this.openProjectButton_Click);
             // 
             // createProjectButton
             // 

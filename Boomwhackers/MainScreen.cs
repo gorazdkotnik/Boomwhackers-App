@@ -89,7 +89,7 @@ namespace Boomwhackers
         }
 
 
-        private void LoadProject(object sender, EventArgs e)
+        public void LoadProject(object sender, EventArgs e)
         {
             if (openProjectDialog.ShowDialog() == DialogResult.OK)
             {
