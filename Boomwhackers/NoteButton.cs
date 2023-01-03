@@ -14,6 +14,7 @@ namespace Boomwhackers
     public partial class NoteButton : UserControl
     {
         public int noteTypeIndex;
+        public float noteTime;
         int animLen = 100;
 
         Color origColor;
@@ -23,7 +24,7 @@ namespace Boomwhackers
         {
             InitializeComponent();
         }
-
+        
         protected override bool ShowFocusCues
         {
             get

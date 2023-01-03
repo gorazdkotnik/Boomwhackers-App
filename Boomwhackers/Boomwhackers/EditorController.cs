@@ -70,6 +70,49 @@ namespace Boomwhackers
             openProject.madeChanges = true;
         }
 
+        void DrawNoteTypeButton(int row, NoteType noteType)
+        {
+            int y = row * rowHeight + margin;
+
+            Label typeLabel = new Label()
+            {
+                Text = noteType.displayName,
+                Location = new Point(margin, (int)y),
+                Size = new Size(firstColumnWidth, rowHeight),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml(noteType.displayColor)
+            };
+
+            AddControlToEditor(typeLabel);
+        }
+
+        void DrawNoteButton(int row, float note, NoteType noteType)
+        {
+            float x = note * colWidth + leftSideMargin;
+            int y = row * rowHeight + margin;
+
+            NoteButton noteBtn = new NoteButton()
+            {
+                Location = new Point((int)x, (int)y),
+                Size = new Size(buttonWidth, buttonHeight),
+                BackColor = ColorTranslator.FromHtml(noteType.displayColor),
+                TabStop = false,
+                Enabled = false,
+                noteTypeIndex = row,
+                noteTime = note
+            };
+
+            /*noteBtn.MouseClick += (sender, e) =>
+            {
+                noteType.notes.Remove(note);
+
+                noteBtn.Dispose();
+
+            };*/
+
+            AddControlToEditor(noteBtn);
+        }
+
         void RedrawButtons()
         {
             containerPanel.SuspendLayout();
@@ -89,39 +132,11 @@ namespace Boomwhackers
             int row = 0;
             foreach (NoteType noteType in openProject.data.notes)
             {
-                y = row * rowHeight + margin;
-
-                Label typeLabel = new Label()
-                {
-                    Text = noteType.displayName,
-                    Location = new Point(margin, (int)y),
-                    Size = new Size(firstColumnWidth, rowHeight),
-                    TextAlign = ContentAlignment.MiddleCenter,
-                    BackColor = ColorTranslator.FromHtml(noteType.displayColor)
-                };
-
-                AddControlToEditor(typeLabel);
+                DrawNoteTypeButton(row, noteType);
 
                 foreach (var note in noteType.notes)
                 {
-                    x = note * colWidth + leftSideMargin;
-
-                    NoteButton noteBtn = new NoteButton()
-                    {
-                        Location = new Point((int)x, (int)y),
-                        Size = new Size(buttonWidth, buttonHeight),
-                        BackColor = ColorTranslator.FromHtml(noteType.displayColor),
-                        TabStop = false,
-                        Enabled = false,
-                    };
-
-                    /*noteBtn.MouseClick += (sender, e) =>
-                    {
-                        noteType.notes.Remove(note.Key);
-                        RedrawButtons();
-                    };*/
-
-                    AddControlToEditor(noteBtn);
+                    DrawNoteButton(row, note, noteType);
                 }
 
                 row++;
@@ -145,7 +160,8 @@ namespace Boomwhackers
                 {
                     openProject.data.notes.Add(addNoteTypeForm.noteType);
                     //MessageBox.Show("Note type added: " + addNoteTypeForm.noteType.ToString());
-                    RedrawButtons();
+                    //RedrawButtons();
+                    DrawNoteTypeButton(openProject.data.notes.Count - 1, addNoteTypeForm.noteType);
 
                     ChangeMade();
                 }
@@ -168,8 +184,8 @@ namespace Boomwhackers
             Point clickPos = containerPanel.PointToClient(Cursor.Position);
 
             // add scroll
-            clickPos.X -= containerPanel.AutoScrollPosition.X;
-            clickPos.Y -= containerPanel.AutoScrollPosition.Y;
+            /*clickPos.X -= containerPanel.AutoScrollOffset.X;
+            clickPos.Y -= containerPanel.AutoScrollOffset.Y;*/
 
 
             if (clickPos.X < leftSideMargin || clickPos.Y < margin)
@@ -177,7 +193,9 @@ namespace Boomwhackers
                 return;
             }
 
-            float noteTime = (clickPos.X - leftSideMargin) / colWidth;
+            MessageBox.Show(clickPos.X + " - " + clickPos.Y);
+
+            float noteTime = (clickPos.X - leftSideMargin) / colWidth; // Scroll
 
             // Get the note type (row) at this y position
             int noteTypeIndex = (clickPos.Y - margin) / rowHeight;
@@ -191,20 +209,39 @@ namespace Boomwhackers
 
             //MessageBox.Show("Obstaja? " + noteTime + " : " + noteType.notes.ContainsKey(noteTime));
 
-            // Add the note to the project
+            // Add or remove the note to/from the project
             if (noteType.notes.Contains(noteTime))
             {
                 noteType.RemoveNote(noteTime);
+
+                /*// Remove the button
+                foreach (Control c in containerPanel.Controls)
+                {
+                    if (c is NoteButton)
+                    {
+                        NoteButton b = (NoteButton)c;
+
+                        if (b.noteTime == noteTime && b.noteTypeIndex == noteTypeIndex)
+                        {
+                            b.Dispose();
+                            break;
+                        }
+                    }
+                }*/
             }
             else
             {
                 noteType.AddNote(noteTime);
+
+                DrawNoteButton(noteTypeIndex, noteTime, noteType);
             }
 
             ChangeMade();
 
-            // Redraw the buttons
-            RedrawButtons();
+            
+
+            /*// Redraw the buttons
+            RedrawButtons();*/
         }
     }
 }
