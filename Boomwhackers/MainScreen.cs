@@ -34,6 +34,8 @@ namespace Boomwhackers
             Filter = BoomProject.filter,
         };
 
+        RecentProjectData recentProjectData = RecentProjectData.Instance;
+
         public Form1()
         {
             InitializeComponent();
@@ -97,6 +99,7 @@ namespace Boomwhackers
                 loadedProjectLocation = openProjectDialog.FileName;
 
                 InitializeEditor();
+                recentProjectData.AddProject(new RecentProject(loadedProjectLocation));
             }
         }
 

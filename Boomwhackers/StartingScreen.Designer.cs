@@ -32,7 +32,7 @@
             this.openProjectButton = new System.Windows.Forms.Button();
             this.createProjectButton = new System.Windows.Forms.Button();
             this.recentProjectsLabel = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.recentProjectsListBox = new System.Windows.Forms.ListBox();
             this.openRecentProjectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -76,14 +76,14 @@
             this.recentProjectsLabel.TabIndex = 3;
             this.recentProjectsLabel.Text = "Nedavni projekti";
             // 
-            // listBox1
+            // recentProjectsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(554, 49);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(213, 196);
-            this.listBox1.TabIndex = 4;
+            this.recentProjectsListBox.FormattingEnabled = true;
+            this.recentProjectsListBox.ItemHeight = 16;
+            this.recentProjectsListBox.Location = new System.Drawing.Point(554, 49);
+            this.recentProjectsListBox.Name = "recentProjectsListBox";
+            this.recentProjectsListBox.Size = new System.Drawing.Size(213, 196);
+            this.recentProjectsListBox.TabIndex = 4;
             // 
             // openRecentProjectButton
             // 
@@ -100,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.openRecentProjectButton);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.recentProjectsListBox);
             this.Controls.Add(this.recentProjectsLabel);
             this.Controls.Add(this.createProjectButton);
             this.Controls.Add(this.openProjectButton);
@@ -118,7 +118,7 @@
         private System.Windows.Forms.Button openProjectButton;
         private System.Windows.Forms.Button createProjectButton;
         private System.Windows.Forms.Label recentProjectsLabel;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox recentProjectsListBox;
         private System.Windows.Forms.Button openRecentProjectButton;
     }
 }

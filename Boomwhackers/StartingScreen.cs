@@ -13,10 +13,12 @@ namespace Boomwhackers
     public partial class StartingScreen : Form
     {
         Form1 mainScreen;
-        
+        RecentProjectData recentProjectData;
+
         public StartingScreen()
         {
             InitializeComponent();
+            recentProjectData = RecentProjectData.Instance;
         }
 
         public StartingScreen(Form1 mainScreen)
