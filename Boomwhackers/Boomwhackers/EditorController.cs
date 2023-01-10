@@ -91,6 +91,10 @@ namespace Boomwhackers
             float x = note * colWidth + leftSideMargin;
             int y = row * rowHeight + margin;
 
+            // Take scroll into account
+            x += containerPanel.AutoScrollPosition.X;
+            y += containerPanel.AutoScrollPosition.Y;
+
             NoteButton noteBtn = new NoteButton()
             {
                 Location = new Point((int)x, (int)y),
@@ -126,9 +130,6 @@ namespace Boomwhackers
 
             editorControls = new List<Control>();
 
-            float x = margin + firstColumnWidth + margin;
-            float y = margin;
-
             int row = 0;
             foreach (NoteType noteType in openProject.data.notes)
             {
@@ -147,7 +148,7 @@ namespace Boomwhackers
             Button addNoteTypeBtn = new Button()
             {
                 Text = "+",
-                Location = new Point(margin, (int)y + rowHeight + margin),
+                Location = new Point(margin, margin + rowHeight * row),
                 Size = new Size(firstColumnWidth, rowHeight),
                 BackColor = Color.LightGray
             };
@@ -159,9 +160,8 @@ namespace Boomwhackers
                 if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
                 {
                     openProject.data.notes.Add(addNoteTypeForm.noteType);
-                    //MessageBox.Show("Note type added: " + addNoteTypeForm.noteType.ToString());
-                    //RedrawButtons();
-                    DrawNoteTypeButton(openProject.data.notes.Count - 1, addNoteTypeForm.noteType);
+                    
+                    RedrawButtons();
 
                     ChangeMade();
                 }
@@ -183,17 +183,17 @@ namespace Boomwhackers
             // Get the click position inside editor control
             Point clickPos = containerPanel.PointToClient(Cursor.Position);
 
+
+
             // add scroll
-            /*clickPos.X -= containerPanel.AutoScrollOffset.X;
-            clickPos.Y -= containerPanel.AutoScrollOffset.Y;*/
+            clickPos.X -= containerPanel.AutoScrollPosition.X;
+            clickPos.Y -= containerPanel.AutoScrollPosition.Y;
 
 
             if (clickPos.X < leftSideMargin || clickPos.Y < margin)
             {
                 return;
             }
-
-            MessageBox.Show(clickPos.X + " - " + clickPos.Y);
 
             float noteTime = (clickPos.X - leftSideMargin) / colWidth; // Scroll
 
@@ -207,7 +207,7 @@ namespace Boomwhackers
 
             NoteType noteType = openProject.data.notes[noteTypeIndex];
 
-            //MessageBox.Show("Obstaja? " + noteTime + " : " + noteType.notes.ContainsKey(noteTime));
+            //MessageBox.Show("Obstaja? " + noteTime); //+ " : " + noteType.notes.ContainsKey(noteTime));
 
             // Add or remove the note to/from the project
             if (noteType.notes.Contains(noteTime))
