@@ -18,13 +18,15 @@ namespace Boomwhackers
         public StartingScreen()
         {
             InitializeComponent();
-            recentProjectData = RecentProjectData.Instance;
         }
 
         public StartingScreen(Form1 mainScreen)
         {
             InitializeComponent();
+
             this.mainScreen = mainScreen;
+            recentProjectData = RecentProjectData.Instance;
+            recentProjectData.RecentProjectsListBox = recentProjectsListBox;
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)
