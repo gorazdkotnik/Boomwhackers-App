@@ -59,6 +59,8 @@
     <Compile Include="Boomwhackers\EditorController.cs" />
     <Compile Include="Boomwhackers\IAnimator.cs" />
     <Compile Include="Boomwhackers\NoteType.cs" />
+    <Compile Include="Boomwhackers\RecentProject.cs" />
+    <Compile Include="Boomwhackers\RecentProjectData.cs" />
     <Compile Include="MusicPlayer.cs">
       <SubType>Form</SubType>
     </Compile>
