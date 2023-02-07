@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Boomwhackers
 {
     public class RecentProjectData
     {
         private List<RecentProject> recentProjects = new List<RecentProject>();
-        private string jsonFileLocation = Path.Combine(Application.StartupPath, "recentProjects.json");
+        private string jsonFileLocation = Path.Combine(Application.StartupPath, "recentprojects.json");
 
         private static RecentProjectData instance = null;
 
@@ -35,6 +36,11 @@ namespace Boomwhackers
 
         public void AddProject(RecentProject project)
         {
+            if (recentProjects.Exists(x => x.Location == project.Location))
+            {
+                recentProjects.Remove(recentProjects.Find(x => x.Location == project.Location));
+            }
+
             recentProjects.Add(project);
             SaveData();
         }
@@ -59,15 +65,14 @@ namespace Boomwhackers
             {
                 File.Create(jsonFileLocation).Close();
             }
-            File.WriteAllText(jsonFileLocation, JsonConvert.SerializeObject(this));
+            File.WriteAllText(jsonFileLocation, JsonConvert.SerializeObject(recentProjects));
         }
 
         public void LoadData()
         {
             if (File.Exists(jsonFileLocation))
-            {
-                RecentProjectData data = JsonConvert.DeserializeObject<RecentProjectData>(File.ReadAllText(jsonFileLocation));
-                recentProjects = data.recentProjects;
+            {      
+                recentProjects = JsonConvert.DeserializeObject<List<RecentProject>>(File.ReadAllText(jsonFileLocation));
             } else
             {
                 SaveData();
