@@ -41,7 +41,13 @@ namespace Boomwhackers
 
         private void openRecentProjectButton_Click(object sender, EventArgs e)
         {
-            
+            if (recentProjectsListBox.Text != "")
+            {
+                mainScreen.LoadProject(recentProjectsListBox.Text);
+            } else
+            {
+                MessageBox.Show("Izberite projekt iz seznama.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
