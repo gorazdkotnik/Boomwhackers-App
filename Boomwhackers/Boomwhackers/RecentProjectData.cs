@@ -70,12 +70,20 @@ namespace Boomwhackers
 
         public void LoadData()
         {
-            if (File.Exists(jsonFileLocation))
-            {      
-                recentProjects = JsonConvert.DeserializeObject<List<RecentProject>>(File.ReadAllText(jsonFileLocation));
-            } else
+            try
             {
-                SaveData();
+                if (File.Exists(jsonFileLocation))
+                {
+                    recentProjects = JsonConvert.DeserializeObject<List<RecentProject>>(File.ReadAllText(jsonFileLocation));
+                }
+                else
+                {
+                    SaveData();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Prišlo je do napake pri nalaganju podatkov o nedavnih projektih. Napaka: ", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
