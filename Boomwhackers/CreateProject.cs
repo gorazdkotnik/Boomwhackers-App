@@ -13,6 +13,7 @@ namespace Boomwhackers
     public partial class CreateProject : Form
     {
         public BoomProject project { get; set; }
+        RecentProjectData recentProjectData = RecentProjectData.Instance;
 
         public CreateProject()
         {
@@ -47,7 +48,11 @@ namespace Boomwhackers
             try
             {
                 project = new BoomProject();
-                project.SaveData(projectRoot + "\\" + projectName + ".boom");
+
+                string location = projectRoot + "\\" + projectName + ".boom";
+                project.SaveData(location);
+
+                recentProjectData.AddProject(new RecentProject(location));
 
                 this.Close();
             }
