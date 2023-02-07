@@ -22,18 +22,17 @@ namespace Boomwhackers
             return Path.GetExtension(path) == extension;
         }
 
-
-        public string projectName;
-
         public BoomData data = new BoomData();
 
+        // Create empty project
         public BoomProject()
         {
+            LoadData(Properties.Resources.ResourceManager.GetString("defaultProject"));
         }
 
         public BoomProject(string location)
         {
-            this.LoadData(location);
+            LoadDataFromFile(location);
         }
 
         [JsonIgnore]
@@ -67,7 +66,7 @@ namespace Boomwhackers
         }
 
 
-        public void LoadData(string loadFile)
+        public void LoadDataFromFile(string loadFile)
         {
             if (!VerifyExtension(loadFile))
             {
@@ -76,6 +75,12 @@ namespace Boomwhackers
 
             string loadData = File.ReadAllText(loadFile);
 
+            LoadData(loadData);
+        }
+
+        public void LoadData(string loadData)
+        {
+            //MessageBox.Show(loadData);
             try
             {
                 JsonConvert.PopulateObject(loadData, this);

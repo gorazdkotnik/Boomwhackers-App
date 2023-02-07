@@ -11,6 +11,7 @@ namespace Boomwhackers
     {
         public string displayName;
         public string displayColor;
+        public string soundLocation = null;
 
         private List<float> _notes = new List<float>();
 

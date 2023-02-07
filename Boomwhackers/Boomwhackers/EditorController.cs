@@ -23,6 +23,8 @@ namespace Boomwhackers
         int buttonWidth = 45;
         int buttonHeight = 45;
 
+        int removeButtonSize = 25;
+
         int firstColumnWidth = 100;
 
         int leftSideMargin;
@@ -78,12 +80,25 @@ namespace Boomwhackers
             {
                 Text = noteType.displayName,
                 Location = new Point(margin, (int)y),
-                Size = new Size(firstColumnWidth, rowHeight),
+                Size = new Size(firstColumnWidth - 25, rowHeight),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml(noteType.displayColor)
             };
 
+            // Button to remove
+            Button removeButton = new Button()
+            {
+                Text = "X",
+                Location = new Point(margin + firstColumnWidth - removeButtonSize, (int)y),
+                Size = new Size(removeButtonSize, removeButtonSize),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = Color.Red,
+            };
+
+            // TODO: onclick
+
             AddControlToEditor(typeLabel);
+            AddControlToEditor(removeButton);
         }
 
         void DrawNoteButton(int row, float note, NoteType noteType)
@@ -214,7 +229,7 @@ namespace Boomwhackers
             {
                 noteType.RemoveNote(noteTime);
 
-                /*// Remove the button
+                // Remove the button
                 foreach (Control c in containerPanel.Controls)
                 {
                     if (c is NoteButton)
@@ -227,7 +242,7 @@ namespace Boomwhackers
                             break;
                         }
                     }
-                }*/
+                }
             }
             else
             {

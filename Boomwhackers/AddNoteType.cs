@@ -13,7 +13,17 @@ namespace Boomwhackers
 {
     public partial class AddNoteType : Form
     {
+        public static string filter = "Sound files (*.wav)|*.wav|All files (*.*)|*.*";
         public NoteType noteType;
+        public string noteSoundLocation = null;
+
+        private OpenFileDialog openSoundDialog = new OpenFileDialog()
+        {
+            FileName = "Izberi zvok",
+            Filter = filter,
+            Title = "Izberi zvok note",
+            InitialDirectory = Environment.GetEnvironmentVariable("USERPROFILE")
+        };
 
         public AddNoteType()
         {
@@ -40,9 +50,26 @@ namespace Boomwhackers
             }
             string hexColor = ColorTranslator.ToHtml(ColorPicker.BackColor);
 
-            noteType = new NoteType(noteName.Text, hexColor);
+            noteType = new NoteType(noteName.Text.Trim(), hexColor);
+
+            if (noteSoundLocation != null)
+            {
+                noteType.soundLocation = noteSoundLocation;
+            }
 
             Close();
+        }
+
+        private void selectNoteSoundButton_Click(object sender, EventArgs e)
+        {
+            // Show the dialog and get result.
+            DialogResult result = openSoundDialog.ShowDialog();
+
+            if (result == DialogResult.OK) // Test result.
+            {
+                noteSoundLocation = openSoundDialog.FileName;
+            }
+
         }
     }
 }
