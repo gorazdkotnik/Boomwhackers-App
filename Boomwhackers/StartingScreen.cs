@@ -38,5 +38,10 @@ namespace Boomwhackers
         {
             mainScreen.LoadProject(sender, e);
         }
+
+        private void openRecentProjectButton_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

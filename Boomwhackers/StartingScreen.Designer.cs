@@ -93,6 +93,7 @@
             this.openRecentProjectButton.TabIndex = 5;
             this.openRecentProjectButton.Text = "Odpri nedavni projekt";
             this.openRecentProjectButton.UseVisualStyleBackColor = true;
+            this.openRecentProjectButton.Click += new System.EventHandler(this.openRecentProjectButton_Click);
             // 
             // StartingScreen
             // 

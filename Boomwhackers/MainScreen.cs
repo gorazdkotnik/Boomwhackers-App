@@ -112,14 +112,19 @@ namespace Boomwhackers
         {
             if (openProjectDialog.ShowDialog() == DialogResult.OK)
             {
-                loadedProject = new BoomProject(openProjectDialog.FileName);
-                loadedProjectLocation = openProjectDialog.FileName;
-
-                InitializeEditor();
-
-                SetStatus("Odprt projekt: " + loadedProjectLocation);
-                recentProjectData.AddProject(new RecentProject(loadedProjectLocation));
+                LoadProject(openProjectDialog.FileName);
             }
+        }
+
+        public void LoadProject(string location)
+        {
+            loadedProject = new BoomProject(location);
+            loadedProjectLocation = location;
+
+            InitializeEditor();
+
+            SetStatus("Odprt projekt: " + loadedProjectLocation);
+            recentProjectData.AddProject(new RecentProject(loadedProjectLocation));
         }
 
         public void createProjectButton_Click(object sender, EventArgs e)
