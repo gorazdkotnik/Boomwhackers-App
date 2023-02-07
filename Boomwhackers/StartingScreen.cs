@@ -18,13 +18,15 @@ namespace Boomwhackers
         public StartingScreen()
         {
             InitializeComponent();
-            recentProjectData = RecentProjectData.Instance;
         }
 
         public StartingScreen(Form1 mainScreen)
         {
             InitializeComponent();
+
             this.mainScreen = mainScreen;
+            recentProjectData = RecentProjectData.Instance;
+            recentProjectData.RecentProjectsListBox = recentProjectsListBox;
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)
@@ -35,6 +37,17 @@ namespace Boomwhackers
         private void openProjectButton_Click(object sender, EventArgs e)
         {
             mainScreen.LoadProject(sender, e);
+        }
+
+        private void openRecentProjectButton_Click(object sender, EventArgs e)
+        {
+            if (recentProjectsListBox.Text != "")
+            {
+                mainScreen.LoadProject(recentProjectsListBox.Text);
+            } else
+            {
+                MessageBox.Show("Izberite projekt iz seznama.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

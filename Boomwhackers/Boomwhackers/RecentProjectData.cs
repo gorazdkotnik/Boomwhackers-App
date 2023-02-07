@@ -14,8 +14,10 @@ namespace Boomwhackers
     {
         private List<RecentProject> recentProjects = new List<RecentProject>();
         private string jsonFileLocation = Path.Combine(Application.StartupPath, "recentprojects.json");
+        private ListBox recentProjectsListBox;
 
         private static RecentProjectData instance = null;
+        
 
         public static RecentProjectData Instance
         {
@@ -26,6 +28,20 @@ namespace Boomwhackers
                     instance = new RecentProjectData();
                 }
                 return instance;
+            }
+        }
+
+        public ListBox RecentProjectsListBox
+        {
+            get
+            {
+                return instance.recentProjectsListBox;
+            }
+            set
+            {
+
+                instance.recentProjectsListBox = value;
+                UpdateListBox();
             }
         }
 
@@ -66,16 +82,40 @@ namespace Boomwhackers
                 File.Create(jsonFileLocation).Close();
             }
             File.WriteAllText(jsonFileLocation, JsonConvert.SerializeObject(recentProjects));
+
+            UpdateListBox();
+        }
+
+        public void UpdateListBox()
+        {
+            if (recentProjectsListBox != null)
+            {
+                recentProjectsListBox.Items.Clear();
+
+                for (int i = recentProjects.Count() - 1; i >= 0; i--)
+                {
+                    recentProjectsListBox.Items.Add(recentProjects[i].Location);
+                }
+            }
         }
 
         public void LoadData()
         {
-            if (File.Exists(jsonFileLocation))
-            {      
-                recentProjects = JsonConvert.DeserializeObject<List<RecentProject>>(File.ReadAllText(jsonFileLocation));
-            } else
+            try
             {
-                SaveData();
+                if (File.Exists(jsonFileLocation))
+                {
+                    recentProjects = JsonConvert.DeserializeObject<List<RecentProject>>(File.ReadAllText(jsonFileLocation));
+                    UpdateListBox();
+                }
+                else
+                {
+                    SaveData();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Prišlo je do napake pri nalaganju podatkov o nedavnih projektih. Napaka: ", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
