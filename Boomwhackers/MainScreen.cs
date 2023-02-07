@@ -41,17 +41,20 @@ namespace Boomwhackers
             InitializeComponent();
             InitializeStartingScreen();
 
+            this.KeyDown += new KeyEventHandler(Form_KeyDown);
 
-            /*project = new BoomProject("testProject", location);
+        }
 
-            project.data.notes.Add(new NoteType("test", "red")
+        // Hot keys handler
+        void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S) // Ctrl-S Save
             {
-                notes = new List<float>()
-                {
-                    1.0f
-                }
-            });
-            jsonData.Text = project.jsonData;*/
+                // Stops other controls on the form receiving event.
+                e.SuppressKeyPress = true;
+
+                SaveProject();
+            }
         }
 
         private void InitializeEditor()
@@ -69,11 +72,23 @@ namespace Boomwhackers
             startingSccreen.Show();
         }
 
+        private void SetStatus(string text)
+        {
+            statusLabel.Text = text;
+        }
+
+        private void ClearStatus()
+        {
+            statusLabel.Text = "";
+        }
+
         void SaveProject()
         {
             if (loadedProjectLocation != null)
             {
                 loadedProject.SaveData(loadedProjectLocation);
+
+                SetStatus("Projekt shranjen: " + loadedProjectLocation);
             }
             else
             {
@@ -87,6 +102,8 @@ namespace Boomwhackers
             {
                 loadedProject.SaveData(saveProjectDialog.FileName);
                 loadedProjectLocation = saveProjectDialog.FileName;
+
+                SetStatus("Projekt shranjen kot: " + saveProjectDialog.FileName);
             }
         }
 
@@ -99,6 +116,8 @@ namespace Boomwhackers
                 loadedProjectLocation = openProjectDialog.FileName;
 
                 InitializeEditor();
+
+                SetStatus("Odprt projekt: " + loadedProjectLocation);
                 recentProjectData.AddProject(new RecentProject(loadedProjectLocation));
             }
         }
