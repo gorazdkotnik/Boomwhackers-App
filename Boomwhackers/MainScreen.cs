@@ -175,5 +175,27 @@ namespace Boomwhackers
         {
             SaveProjectAs();
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (loadedProject != null && loadedProject.madeChanges)
+            {
+                e.Cancel = true;
+
+                DialogResult result = MessageBox.Show("Ali želite shraniti spremembe?", "Shranjevanje sprememb", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    SaveProject();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else if (result == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+            }
+        }
     }
 }

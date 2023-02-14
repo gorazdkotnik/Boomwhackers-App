@@ -118,6 +118,100 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="defaultProject" xml:space="preserve">
-    <value>{"data":{"notes":[{"displayName":"test","displayColor":"red","notes":[]},{"displayName":"test","displayColor":"Teal","notes":[]},{"displayName":"2","displayColor":"#FF8040","notes":[]},{"displayName":"asd","displayColor":"Aqua","notes":[]},{"displayName":"dsg","displayColor":"#8080C0","notes":[]}]}}</value>
+    <value>{
+   "data":{
+      "notes":[
+         {
+            "displayName":"do",
+            "displayColor":"Red",
+            "soundLocation":"resources://do",
+            "notes":[
+               0.0
+            ]
+         },
+         {
+            "displayName":"re",
+            "displayColor":"Yellow",
+            "soundLocation":"resources://re",
+            "notes":[
+               1.0
+            ]
+         },
+         {
+            "displayName":"mi",
+            "displayColor":"#80FF00",
+            "soundLocation":"resources://mi",
+            "notes":[
+               2.0
+            ]
+         },
+         {
+            "displayName":"fa",
+            "displayColor":"#00FF40",
+            "soundLocation":"resources://fa",
+            "notes":[
+               3.0
+            ]
+         },
+         {
+            "displayName":"sol",
+            "displayColor":"Aqua",
+            "soundLocation":"resources://sol",
+            "notes":[
+               4.0
+            ]
+         },
+         {
+            "displayName":"la",
+            "displayColor":"#0080C0",
+            "soundLocation":"resources://la",
+            "notes":[
+               5.0
+            ]
+         },
+         {
+            "displayName":"si",
+            "displayColor":"#8080C0",
+            "soundLocation":"resources://si",
+            "notes":[
+               6.0
+            ]
+         },
+         {
+            "displayName":"do2",
+            "displayColor":"Fuchsia",
+            "soundLocation":"resources://do2",
+            "notes":[
+               7.0
+            ]
+         }
+      ]
+   }
+}</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="do" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\do.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="do2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\do2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fa.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="la" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\la.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mi.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="re" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="si" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\si.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sol.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -67,11 +67,11 @@
     <Compile Include="MusicPlayer.Designer.cs">
       <DependentUpon>MusicPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddNoteType.cs">
+    <Compile Include="EditNoteType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddNoteType.Designer.cs">
-      <DependentUpon>AddNoteType.cs</DependentUpon>
+    <Compile Include="EditNoteType.Designer.cs">
+      <DependentUpon>EditNoteType.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
@@ -99,8 +99,8 @@
     <Compile Include="StartingScreen.Designer.cs">
       <DependentUpon>StartingScreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddNoteType.resx">
-      <DependentUpon>AddNoteType.cs</DependentUpon>
+    <EmbeddedResource Include="EditNoteType.resx">
+      <DependentUpon>EditNoteType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MusicPlayer.resx">
       <DependentUpon>MusicPlayer.cs</DependentUpon>
@@ -140,6 +140,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\do.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\do2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fa.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\la.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mi.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\si.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sol.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

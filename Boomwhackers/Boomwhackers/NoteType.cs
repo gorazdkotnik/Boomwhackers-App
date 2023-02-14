@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,8 +57,20 @@ namespace Boomwhackers
         {
             if (soundLocation != null)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundLocation);
-                player.Play();
+                // We use this for the default project
+                if (soundLocation.StartsWith("resources://"))
+                {
+                    string resourceName = soundLocation.Substring(12);
+                    Stream stream = Properties.Resources.ResourceManager.GetStream(resourceName);
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(stream);
+                    player.Play();
+                    return;
+                }
+                else
+                {
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundLocation);
+                    player.Play();
+                }
             }
         }
     }

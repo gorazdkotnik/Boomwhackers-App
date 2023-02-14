@@ -84,13 +84,27 @@ namespace Boomwhackers
         {
             int y = row * rowHeight + margin;
 
-            Label typeLabel = new Label()
+            Button typeButton = new Button()
             {
                 Text = noteType.displayName,
                 Location = new Point(margin, (int)y),
                 Size = new Size(firstColumnWidth - 25, rowHeight),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml(noteType.displayColor)
+            };
+
+            typeButton.MouseClick += (sender, e) =>
+            {
+                EditNoteType editor = new EditNoteType(noteType);
+
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    openProject.data.notes[row] = editor.noteType;
+
+                    RedrawButtons();
+
+                    ChangeMade();
+                }
             };
 
             // Button to remove
@@ -112,7 +126,7 @@ namespace Boomwhackers
                 ChangeMade();
             };
 
-            AddControlToEditor(typeLabel);
+            AddControlToEditor(typeButton);
             AddControlToEditor(removeButton);
         }
 
@@ -185,7 +199,7 @@ namespace Boomwhackers
 
             addNoteTypeBtn.MouseClick += (sender, e) =>
             {
-                AddNoteType addNoteTypeForm = new AddNoteType();
+                EditNoteType addNoteTypeForm = new EditNoteType();
 
                 if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
                 {
@@ -270,10 +284,6 @@ namespace Boomwhackers
 
             ChangeMade();
 
-
-
-            /*// Redraw the buttons
-            RedrawButtons();*/
         }
 
 

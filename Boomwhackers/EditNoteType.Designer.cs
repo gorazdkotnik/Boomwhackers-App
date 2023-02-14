@@ -1,6 +1,6 @@
 ﻿namespace Boomwhackers
 {
-    partial class AddNoteType
+    partial class EditNoteType
     {
         /// <summary>
         /// Required designer variable.

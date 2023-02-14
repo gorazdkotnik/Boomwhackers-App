@@ -11,8 +11,10 @@ using System.Windows.Forms;
 
 namespace Boomwhackers
 {
-    public partial class AddNoteType : Form
+    public partial class EditNoteType : Form
     {
+        public enum WindowType { Add, Edit };
+
         public static string filter = "Sound files (*.wav)|*.wav|All files (*.*)|*.*";
         public NoteType noteType;
         public string noteSoundLocation = null;
@@ -25,9 +27,28 @@ namespace Boomwhackers
             InitialDirectory = Environment.GetEnvironmentVariable("USERPROFILE")
         };
 
-        public AddNoteType()
+
+        public EditNoteType()
         {
             InitializeComponent();
+            this.Text = "Dodajanje note";
+            Submit.Text = "Dodaj";
+
+        }
+        public EditNoteType(NoteType noteType)
+        {
+            InitializeComponent();
+            this.Text = "Urejanje note";
+            Submit.Text = "Shrani";
+
+            this.noteType = noteType;
+
+            noteName.Text = noteType.displayName;
+            ColorPicker.BackColor = ColorTranslator.FromHtml(noteType.displayColor);
+            noteSoundLocation = noteType.soundLocation;
+            if (noteSoundLocation != null)
+                selectedNoteSoundLabel.Text = noteSoundLocation;
+
         }
 
         private void ColorPicker_Click(object sender, EventArgs e)
@@ -50,7 +71,17 @@ namespace Boomwhackers
             }
             string hexColor = ColorTranslator.ToHtml(ColorPicker.BackColor);
 
-            noteType = new NoteType(noteName.Text.Trim(), hexColor);
+            if (noteType == null)
+            {
+                noteType = new NoteType(noteName.Text.Trim(), hexColor);
+            }
+            else
+            {
+                noteType.displayName = noteName.Text.Trim();
+                noteType.displayColor = hexColor;
+            }
+
+
 
             if (noteSoundLocation != null)
             {
