@@ -15,6 +15,7 @@ namespace Boomwhackers
         private List<RecentProject> recentProjects = new List<RecentProject>();
         private string jsonFileLocation = Path.Combine(Application.StartupPath, "recentprojects.json");
         private ListBox recentProjectsListBox;
+        private int maxSize = 10;
 
         private static RecentProjectData instance = null;
         
@@ -58,6 +59,12 @@ namespace Boomwhackers
             }
 
             recentProjects.Add(project);
+
+            if (recentProjects.Count > maxSize)
+            {
+                recentProjects.RemoveAt(0);
+            }
+
             SaveData();
         }
 
