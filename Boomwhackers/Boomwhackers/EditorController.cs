@@ -263,6 +263,8 @@ namespace Boomwhackers
             {
                 noteType.AddNote(noteTime);
 
+                noteType.PlaySound();
+
                 DrawNoteButton(noteTypeIndex, noteTime, noteType);
             }
 
