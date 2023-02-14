@@ -26,7 +26,7 @@ namespace Boomwhackers
 
             this.mainScreen = mainScreen;
             recentProjectData = RecentProjectData.Instance;
-            recentProjectData.RecentProjectsListBox = recentProjectsListBox;
+            recentProjectData.RecentProjectsListBox = recentProjectsListBox
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)

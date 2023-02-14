@@ -48,9 +48,10 @@
             // 
             // openProjectButton
             // 
-            this.openProjectButton.Location = new System.Drawing.Point(19, 49);
+            this.openProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.openProjectButton.Location = new System.Drawing.Point(272, 49);
             this.openProjectButton.Name = "openProjectButton";
-            this.openProjectButton.Size = new System.Drawing.Size(180, 23);
+            this.openProjectButton.Size = new System.Drawing.Size(225, 75);
             this.openProjectButton.TabIndex = 1;
             this.openProjectButton.Text = "Odpri nov projekt";
             this.openProjectButton.UseVisualStyleBackColor = true;
@@ -58,9 +59,10 @@
             // 
             // createProjectButton
             // 
-            this.createProjectButton.Location = new System.Drawing.Point(19, 79);
+            this.createProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.createProjectButton.Location = new System.Drawing.Point(19, 49);
             this.createProjectButton.Name = "createProjectButton";
-            this.createProjectButton.Size = new System.Drawing.Size(180, 23);
+            this.createProjectButton.Size = new System.Drawing.Size(225, 75);
             this.createProjectButton.TabIndex = 2;
             this.createProjectButton.Text = "Ustvari nov projekt";
             this.createProjectButton.UseVisualStyleBackColor = true;
@@ -78,18 +80,21 @@
             // 
             // recentProjectsListBox
             // 
+            this.recentProjectsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.recentProjectsListBox.FormattingEnabled = true;
-            this.recentProjectsListBox.ItemHeight = 16;
+            this.recentProjectsListBox.HorizontalScrollbar = true;
+            this.recentProjectsListBox.ItemHeight = 20;
             this.recentProjectsListBox.Location = new System.Drawing.Point(554, 49);
             this.recentProjectsListBox.Name = "recentProjectsListBox";
-            this.recentProjectsListBox.Size = new System.Drawing.Size(213, 196);
+            this.recentProjectsListBox.Size = new System.Drawing.Size(213, 184);
             this.recentProjectsListBox.TabIndex = 4;
             // 
             // openRecentProjectButton
             // 
-            this.openRecentProjectButton.Location = new System.Drawing.Point(554, 252);
+            this.openRecentProjectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.openRecentProjectButton.Location = new System.Drawing.Point(554, 239);
             this.openRecentProjectButton.Name = "openRecentProjectButton";
-            this.openRecentProjectButton.Size = new System.Drawing.Size(213, 23);
+            this.openRecentProjectButton.Size = new System.Drawing.Size(213, 50);
             this.openRecentProjectButton.TabIndex = 5;
             this.openRecentProjectButton.Text = "Odpri nedavni projekt";
             this.openRecentProjectButton.UseVisualStyleBackColor = true;
