@@ -209,6 +209,9 @@ namespace Boomwhackers
                 // Animate this noteTypeButton
                 NoteButton noteTypeButton = noteTypeButtons[b.noteTypeIndex];
                 noteTypeButton.Animate();
+
+                NoteType noteType = openProject.data.notes[b.noteTypeIndex];
+                noteType.PlaySound();
             }
 
             //Console.WriteLine(removedNotes.ToString() + "/" + notesCount.ToString());

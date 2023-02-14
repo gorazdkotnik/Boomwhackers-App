@@ -51,5 +51,13 @@ namespace Boomwhackers
             return "NoteType[displayName=" + displayName + ", displayColor=" + displayColor + "]";
         }
 
+        public void PlaySound()
+        {
+            if (soundLocation != null)
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundLocation);
+                player.Play();
+            }
+        }
     }
 }

@@ -68,6 +68,8 @@ namespace Boomwhackers
             if (result == DialogResult.OK) // Test result.
             {
                 noteSoundLocation = openSoundDialog.FileName;
+
+                selectedNoteSoundLabel.Text = noteSoundLocation;
             }
 
         }
