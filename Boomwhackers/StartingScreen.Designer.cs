@@ -113,6 +113,8 @@
             this.Controls.Add(this.startingLabel);
             this.Name = "StartingScreen";
             this.Text = "StartingScreen";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartingScreen_FormClosing);
+            this.Shown += new System.EventHandler(this.StartingScreen_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

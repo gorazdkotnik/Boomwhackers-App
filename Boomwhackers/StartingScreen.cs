@@ -25,18 +25,40 @@ namespace Boomwhackers
             InitializeComponent();
 
             this.mainScreen = mainScreen;
+            mainScreen.FormClosing += MainScreen_FormClosing;
+
             recentProjectData = RecentProjectData.Instance;
-            recentProjectData.RecentProjectsListBox = recentProjectsListBox
+            recentProjectData.RecentProjectsListBox = recentProjectsListBox;
+        }
+
+        private void ShowMainScreen()
+        {
+            mainScreen.Visible = true;
+            this.Visible = false;
+        }
+
+        private void HideMainScreen()
+        {
+            mainScreen.Visible = false;
+            this.Visible = true;
+        }
+
+        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            HideMainScreen();
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
             mainScreen.createProjectButton_Click(sender, e);
+            ShowMainScreen();
         }
         
         private void openProjectButton_Click(object sender, EventArgs e)
         {
             mainScreen.LoadProject(sender, e);
+            ShowMainScreen();
         }
 
         private void openRecentProjectButton_Click(object sender, EventArgs e)
@@ -44,10 +66,21 @@ namespace Boomwhackers
             if (recentProjectsListBox.Text != "")
             {
                 mainScreen.LoadProject(recentProjectsListBox.Text);
+                ShowMainScreen();
             } else
             {
                 MessageBox.Show("Izberite projekt iz seznama.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void StartingScreen_Shown(object sender, EventArgs e)
+        {
+            HideMainScreen();
+        }
+
+        private void StartingScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

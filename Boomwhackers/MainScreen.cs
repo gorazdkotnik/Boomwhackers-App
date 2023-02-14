@@ -77,11 +77,6 @@ namespace Boomwhackers
             statusLabel.Text = text;
         }
 
-        private void ClearStatus()
-        {
-            statusLabel.Text = "";
-        }
-
         void SaveProject()
         {
             if (loadedProjectLocation != null)
