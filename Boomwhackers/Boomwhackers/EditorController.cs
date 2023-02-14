@@ -29,11 +29,17 @@ namespace Boomwhackers
 
         int leftSideMargin;
 
+
+        Point mouseDownPos;
+        Point lastEndPosition;
+
         public EditorController(Panel containerPanel, BoomProject project)
         {
             this.containerPanel = containerPanel;
 
-            containerPanel.MouseClick += Editor_MouseClick;
+            containerPanel.MouseDown += Editor_MouseDown;
+            containerPanel.MouseMove += Editor_MouseMove;
+            containerPanel.MouseUp += Editor_MouseUp;
 
             leftSideMargin = firstColumnWidth + margin * 2;
 
@@ -64,7 +70,9 @@ namespace Boomwhackers
         {
             ClearButtons();
 
-            containerPanel.MouseClick -= Editor_MouseClick;
+            containerPanel.MouseDown -= Editor_MouseDown;
+            containerPanel.MouseMove -= Editor_MouseMove;
+            containerPanel.MouseUp -= Editor_MouseUp;
         }
 
         void ChangeMade()
@@ -95,7 +103,14 @@ namespace Boomwhackers
                 BackColor = Color.Red,
             };
 
-            // TODO: onclick
+            removeButton.MouseClick += (sender, e) =>
+            {
+                openProject.data.notes.Remove(noteType);
+
+                RedrawButtons();
+
+                ChangeMade();
+            };
 
             AddControlToEditor(typeLabel);
             AddControlToEditor(removeButton);
@@ -175,7 +190,7 @@ namespace Boomwhackers
                 if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
                 {
                     openProject.data.notes.Add(addNoteTypeForm.noteType);
-                    
+
                     RedrawButtons();
 
                     ChangeMade();
@@ -253,10 +268,52 @@ namespace Boomwhackers
 
             ChangeMade();
 
-            
+
 
             /*// Redraw the buttons
             RedrawButtons();*/
+        }
+
+
+        private void Editor_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDownPos = e.Location;
+        }
+
+        double pointsDistance(Point a, Point b)
+        {
+            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+        }
+
+        bool isMoveDistance(Point a, Point b)
+        {
+            return pointsDistance(a, b) > 5;
+        }
+
+        private void Editor_MouseMove(object sender, MouseEventArgs e)
+        {
+            // if leftclick
+            if (e.Button == MouseButtons.Left && isMoveDistance(mouseDownPos, new Point(e.X, e.Y)))
+            {
+                containerPanel.Cursor = Cursors.Hand;
+                containerPanel.AutoScrollPosition = new Point(
+                    mouseDownPos.X - e.X - lastEndPosition.X,
+                    mouseDownPos.Y - e.Y - lastEndPosition.Y
+                );
+            }
+        }
+
+        private void Editor_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isMoveDistance(mouseDownPos, new Point(e.X, e.Y)))
+            {
+                containerPanel.Cursor = Cursors.Default;
+                lastEndPosition = containerPanel.AutoScrollPosition;
+            } else
+            {
+                // It's a click
+                Editor_MouseClick(sender, e);
+            }
         }
     }
 }
