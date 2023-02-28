@@ -53,7 +53,22 @@ namespace Boomwhackers
             return "NoteType[displayName=" + displayName + ", displayColor=" + displayColor + "]";
         }
 
+        #region Sound
+
+        SoundPlayer player;
+
         public void PlaySound()
+        {
+            if (soundLocation != null)
+            {
+                if (player == null)
+                    PreloadSound();
+
+                player.Play();
+            }
+        }
+
+        public void PreloadSound()
         {
             if (soundLocation != null)
             {
@@ -62,16 +77,15 @@ namespace Boomwhackers
                 {
                     string resourceName = soundLocation.Substring(12);
                     Stream stream = Properties.Resources.ResourceManager.GetStream(resourceName);
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(stream);
-                    player.Play();
-                    return;
+                    player = new SoundPlayer(stream);
                 }
                 else
                 {
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundLocation);
-                    player.Play();
+                    player = new SoundPlayer(soundLocation);
                 }
             }
         }
+
+        #endregion
     }
 }

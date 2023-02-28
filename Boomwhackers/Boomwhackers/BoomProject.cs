@@ -59,6 +59,8 @@ namespace Boomwhackers
             try
             {
                 File.WriteAllText(path, jsonData);
+
+                projectLocationIfKnown = path;
                 //MessageBox.Show("Projekt je bil uspešno shranjen.", "Shranjevanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -97,6 +99,14 @@ namespace Boomwhackers
             catch
             {
                 throw new InvalidDataException();
+            }
+        }
+
+        public void PreloadNoteSounds()
+        {
+            foreach (var note in data.notes)
+            {
+                note.PreloadSound();
             }
         }
     }

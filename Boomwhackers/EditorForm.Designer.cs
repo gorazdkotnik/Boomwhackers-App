@@ -101,7 +101,9 @@
             this.editorPanel.Name = "editorPanel";
             this.editorPanel.Size = new System.Drawing.Size(1086, 433);
             this.editorPanel.TabIndex = 7;
-            this.editorPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseClick);
+            this.editorPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseDown);
+            this.editorPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
+            this.editorPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 
             // button1
             // 

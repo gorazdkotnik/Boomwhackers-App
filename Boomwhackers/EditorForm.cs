@@ -118,7 +118,7 @@ namespace Boomwhackers
                 if (result == DialogResult.Yes)
                 {
                     ProjectManager.SaveProjectDialog(openProject);
-                    //e.Cancel = false;
+                    e.Cancel = false;
                 }
                 else if (result == DialogResult.Cancel)
                 {
