@@ -31,16 +31,11 @@ namespace Boomwhackers
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
-            CreateProject form2 = new CreateProject();
+            BoomProject newProject = ProjectManager.CreateProjectDialog();
 
-            if (form2.ShowDialog() == DialogResult.OK)
+            if (newProject != null)
             {
-                BoomProject frm2Project = form2.project;
-
-                if (frm2Project != null)
-                {
-                    InitializeEditor(frm2Project);
-                }
+                OpenEditor(newProject);
             }
         }
 
@@ -50,7 +45,7 @@ namespace Boomwhackers
 
             if (project != null)
             {
-                InitializeEditor(project);
+                OpenEditor(project);
             }
         }
 
@@ -60,13 +55,19 @@ namespace Boomwhackers
             if (index != ListBox.NoMatches)
             {
                 BoomProject chosenProject = ProjectManager.LoadProject(recentProjectsListBox.SelectedItem.ToString());
-                InitializeEditor(chosenProject);
+                OpenEditor(chosenProject);
             }
         }
 
-        void InitializeEditor(BoomProject project)
+        void OpenEditor(BoomProject project)
         {
+            FillRecentProjects(); // Update
             
+            EditorForm editor = new EditorForm(project);
+            this.Hide();
+            editor.ShowDialog();
+            this.Show();
+
         }
     }
 }

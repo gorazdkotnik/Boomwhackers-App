@@ -60,34 +60,10 @@ namespace Boomwhackers
             }
         }
 
-        /*private void InitializeEditor()
-        {
-            if (currentEditorController != null)
-            {
-                currentEditorController.Unload();
-            }
-            currentEditorController = new EditorController(editorPanel, openProject);
-        }*/
-        
         private void SetStatus(string text)
         {
             statusLabel.Text = text;
         }
-
-        
-
-
-        public void LoacProject_click(object sender, EventArgs e)
-        {
-            BoomProject loadedProject = ProjectManager.LoadProjectDialog();
-
-            if (loadedProject != null)
-            {
-                openProject = loadedProject;
-                //InitializeEditor();
-            }
-        }
-
         private void openMusicPlayer_Click(object sender, EventArgs e)
         {
             if (openProject == null)
@@ -102,10 +78,24 @@ namespace Boomwhackers
             musicPlayer.Show();
         }
 
+        public void LoacProject_click(object sender, EventArgs e)
+        {
+            BoomProject loadedProject = ProjectManager.LoadProjectDialog();
+
+            if (loadedProject != null)
+            {
+                openProject = loadedProject;
+            }
+        }
+
         private void NewProjectItem_Click(object sender, EventArgs e)
         {
-            openProject = new BoomProject();
-            //InitializeEditor();
+            BoomProject newProject = ProjectManager.CreateProjectDialog();
+
+            if (newProject != null)
+            {
+                openProject = newProject;
+            }
         }
 
         private void SaveProjectItem_Click(object sender, EventArgs e)

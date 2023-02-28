@@ -101,6 +101,7 @@
             this.editorPanel.Name = "editorPanel";
             this.editorPanel.Size = new System.Drawing.Size(1086, 433);
             this.editorPanel.TabIndex = 7;
+            this.editorPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseClick);
             // 
             // button1
             // 
@@ -127,7 +128,7 @@
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // Form1
+            // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -139,7 +140,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
+            this.Name = "EditorForm";
             this.Text = "Boomwhackers";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);

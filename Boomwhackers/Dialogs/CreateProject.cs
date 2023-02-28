@@ -53,6 +53,8 @@ namespace Boomwhackers
 
                 RecentProjectsData.AddProject(new RecentProject(location));
 
+                DialogResult = DialogResult.OK;
+
                 this.Close();
             }
             catch (Exception ex)

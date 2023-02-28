@@ -73,6 +73,27 @@ namespace Boomwhackers
             return project;
         }
 
+        public static BoomProject CreateProjectDialog()
+        {
+            CreateProject createForm = new CreateProject();
+
+            if (createForm.ShowDialog() == DialogResult.OK)
+            {
+                BoomProject openProject = createForm.project;
+
+                if (openProject != null)
+                {
+                    return openProject;
+                }
+                else
+                {
+                    MessageBox.Show("Null project");
+                }
+            }
+
+            return null;
+        }
+
 
     }
 }

@@ -75,9 +75,16 @@ namespace Boomwhackers
                 throw new Exception("Invalid file extension");
             }
 
-            string loadData = File.ReadAllText(loadFile);
+            try
+            {
+                string loadData = File.ReadAllText(loadFile);
 
-            LoadData(loadData);
+                LoadData(loadData);
+            } catch (FileNotFoundException e)
+            {
+                MessageBox.Show("Datoteka ne obstaja.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         public void LoadData(string loadData)
