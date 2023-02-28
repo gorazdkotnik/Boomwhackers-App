@@ -56,33 +56,34 @@
     <Compile Include="Boomwhackers\BoomProject.cs" />
     <Compile Include="Boomwhackers\BoomData.cs" />
     <Compile Include="Boomwhackers\CControlAnimator.cs" />
+    <Compile Include="Boomwhackers\ProjectManager.cs" />
     <Compile Include="Boomwhackers\EditorController.cs" />
     <Compile Include="Boomwhackers\IAnimator.cs" />
     <Compile Include="Boomwhackers\NoteType.cs" />
     <Compile Include="Boomwhackers\RecentProject.cs" />
-    <Compile Include="Boomwhackers\RecentProjectData.cs" />
-    <Compile Include="MusicPlayer.cs">
+    <Compile Include="Boomwhackers\RecentProjectsData.cs" />
+    <Compile Include="PlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MusicPlayer.Designer.cs">
-      <DependentUpon>MusicPlayer.cs</DependentUpon>
+    <Compile Include="PlayerForm.Designer.cs">
+      <DependentUpon>PlayerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditNoteType.cs">
+    <Compile Include="Dialogs\EditNoteType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditNoteType.Designer.cs">
+    <Compile Include="Dialogs\EditNoteType.Designer.cs">
       <DependentUpon>EditNoteType.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainScreen.cs">
+    <Compile Include="EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainScreen.Designer.cs">
-      <DependentUpon>MainScreen.cs</DependentUpon>
+    <Compile Include="EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateProject.cs">
+    <Compile Include="Dialogs\CreateProject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateProject.Designer.cs">
+    <Compile Include="Dialogs\CreateProject.Designer.cs">
       <DependentUpon>CreateProject.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -93,22 +94,22 @@
     <Compile Include="NoteButton.Designer.cs">
       <DependentUpon>NoteButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="StartingScreen.cs">
+    <Compile Include="StartingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StartingScreen.Designer.cs">
-      <DependentUpon>StartingScreen.cs</DependentUpon>
+    <Compile Include="StartingForm.Designer.cs">
+      <DependentUpon>StartingForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditNoteType.resx">
+    <EmbeddedResource Include="Dialogs\EditNoteType.resx">
       <DependentUpon>EditNoteType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MusicPlayer.resx">
-      <DependentUpon>MusicPlayer.cs</DependentUpon>
+    <EmbeddedResource Include="PlayerForm.resx">
+      <DependentUpon>PlayerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainScreen.resx">
-      <DependentUpon>MainScreen.cs</DependentUpon>
+    <EmbeddedResource Include="EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateProject.resx">
+    <EmbeddedResource Include="Dialogs\CreateProject.resx">
       <DependentUpon>CreateProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NoteButton.resx">
@@ -124,8 +125,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StartingScreen.resx">
-      <DependentUpon>StartingScreen.cs</DependentUpon>
+    <EmbeddedResource Include="StartingForm.resx">
+      <DependentUpon>StartingForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -24,6 +24,8 @@ namespace Boomwhackers
 
         public BoomData data = new BoomData();
 
+        public string projectLocationIfKnown = null;
+
         // Create empty project
         public BoomProject()
         {

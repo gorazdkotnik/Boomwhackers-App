@@ -1,6 +1,6 @@
 ﻿namespace Boomwhackers
 {
-    partial class Form1
+    partial class EditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -76,7 +76,7 @@
             this.OpenProjectItem.Name = "OpenProjectItem";
             this.OpenProjectItem.Size = new System.Drawing.Size(176, 22);
             this.OpenProjectItem.Text = "Odpri projekt";
-            this.OpenProjectItem.Click += new System.EventHandler(this.LoadProject);
+            this.OpenProjectItem.Click += new System.EventHandler(this.LoacProject_click);
             // 
             // SaveProjectItem
             // 
@@ -104,11 +104,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(318, 476);
+            this.button1.Location = new System.Drawing.Point(12, 466);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(102, 48);
             this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
+            this.button1.Text = "Predvajaj";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.openMusicPlayer_Click);
             // 
