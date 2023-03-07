@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,8 @@ using System.Windows.Forms;
 
 namespace Boomwhackers
 {
-    internal class EditorController
+    public partial class EditorForm : Form
     {
-        private Panel containerPanel;
-
-        BoomProject openProject;
 
         List<Control> editorControls;
 
@@ -33,13 +32,14 @@ namespace Boomwhackers
         Point mouseDownPos;
         Point lastEndPosition;
 
-        public EditorController(Panel containerPanel, BoomProject project)
-        {
-            this.containerPanel = containerPanel;
+        BoomProject openProject;
 
-            containerPanel.MouseDown += Editor_MouseDown;
-            containerPanel.MouseMove += Editor_MouseMove;
-            containerPanel.MouseUp += Editor_MouseUp;
+
+        public EditorForm(BoomProject project)
+        {
+            InitializeComponent();
+
+            this.KeyDown += new KeyEventHandler(Form_KeyDown);
 
             leftSideMargin = firstColumnWidth + margin * 2;
 
@@ -48,9 +48,92 @@ namespace Boomwhackers
             RedrawButtons();
         }
 
+        // Hot keys handler
+        void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.S) // Ctrl-S Save
+            {
+                // Stops other controls on the form receiving event.
+                e.SuppressKeyPress = true;
+
+                ProjectManager.SaveProjectDialog(openProject);
+            }
+        }
+
+        private void SetStatus(string text)
+        {
+            statusLabel.Text = text;
+        }
+        private void openMusicPlayer_Click(object sender, EventArgs e)
+        {
+            if (openProject == null)
+            {
+                MessageBox.Show(
+                    "Da lahko dostopate do predvajalnika not morate odpreti ali ustvariti projekt.",
+                    "Napaka pri odpiranju predvajalnika not", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Form musicPlayer = new PlayerForm(openProject);
+            musicPlayer.Show();
+        }
+
+        public void LoacProject_click(object sender, EventArgs e)
+        {
+            BoomProject loadedProject = ProjectManager.LoadProjectDialog();
+
+            if (loadedProject != null)
+            {
+                openProject = loadedProject;
+            }
+        }
+
+        private void NewProjectItem_Click(object sender, EventArgs e)
+        {
+            BoomProject newProject = ProjectManager.CreateProjectDialog();
+
+            if (newProject != null)
+            {
+                openProject = newProject;
+            }
+        }
+
+        private void SaveProjectItem_Click(object sender, EventArgs e)
+        {
+            ProjectManager.SaveProjectDialog(openProject);
+        }
+
+        private void SaveProjectAsItem_Click(object sender, EventArgs e)
+        {
+            ProjectManager.SaveProjectAsDialog(openProject);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (openProject != null && openProject.madeChanges)
+            {
+                e.Cancel = true;
+
+                DialogResult result = MessageBox.Show("Ali želite shraniti spremembe?", "Shranjevanje sprememb", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    ProjectManager.SaveProjectDialog(openProject);
+                    e.Cancel = false;
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else if (result == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+            }
+        }
+
         public void AddControlToEditor(Control control)
         {
-            containerPanel.Controls.Add(control);
+            editorPanel.Controls.Add(control);
 
             editorControls.Add(control);
         }
@@ -66,15 +149,6 @@ namespace Boomwhackers
             }
         }
 
-        public void Unload()
-        {
-            ClearButtons();
-
-            containerPanel.MouseDown -= Editor_MouseDown;
-            containerPanel.MouseMove -= Editor_MouseMove;
-            containerPanel.MouseUp -= Editor_MouseUp;
-        }
-
         void ChangeMade()
         {
             openProject.madeChanges = true;
@@ -84,13 +158,27 @@ namespace Boomwhackers
         {
             int y = row * rowHeight + margin;
 
-            Label typeLabel = new Label()
+            Button typeButton = new Button()
             {
                 Text = noteType.displayName,
                 Location = new Point(margin, (int)y),
                 Size = new Size(firstColumnWidth - 25, rowHeight),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml(noteType.displayColor)
+            };
+
+            typeButton.MouseClick += (sender, e) =>
+            {
+                EditNoteType editor = new EditNoteType(noteType);
+
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    openProject.data.notes[row] = editor.noteType;
+
+                    RedrawButtons();
+
+                    ChangeMade();
+                }
             };
 
             // Button to remove
@@ -112,7 +200,7 @@ namespace Boomwhackers
                 ChangeMade();
             };
 
-            AddControlToEditor(typeLabel);
+            AddControlToEditor(typeButton);
             AddControlToEditor(removeButton);
         }
 
@@ -122,8 +210,8 @@ namespace Boomwhackers
             int y = row * rowHeight + margin;
 
             // Take scroll into account
-            x += containerPanel.AutoScrollPosition.X;
-            y += containerPanel.AutoScrollPosition.Y;
+            x += editorPanel.AutoScrollPosition.X;
+            y += editorPanel.AutoScrollPosition.Y;
 
             NoteButton noteBtn = new NoteButton()
             {
@@ -149,9 +237,9 @@ namespace Boomwhackers
 
         void RedrawButtons()
         {
-            containerPanel.SuspendLayout();
+            editorPanel.SuspendLayout();
             // save scroll location
-            Point scroll = containerPanel.AutoScrollPosition;
+            Point scroll = editorPanel.AutoScrollPosition;
 
             // remove old 
             ClearButtons();
@@ -185,7 +273,7 @@ namespace Boomwhackers
 
             addNoteTypeBtn.MouseClick += (sender, e) =>
             {
-                AddNoteType addNoteTypeForm = new AddNoteType();
+                EditNoteType addNoteTypeForm = new EditNoteType();
 
                 if (addNoteTypeForm.ShowDialog() == DialogResult.OK)
                 {
@@ -200,9 +288,9 @@ namespace Boomwhackers
             AddControlToEditor(addNoteTypeBtn);
 
             // restore scroll location
-            containerPanel.AutoScrollPosition = new Point(-scroll.X, -scroll.Y);
+            editorPanel.AutoScrollPosition = new Point(-scroll.X, -scroll.Y);
 
-            containerPanel.ResumeLayout();
+            editorPanel.ResumeLayout();
 
         }
 
@@ -211,13 +299,13 @@ namespace Boomwhackers
             // Add note at click position in form
 
             // Get the click position inside editor control
-            Point clickPos = containerPanel.PointToClient(Cursor.Position);
+            Point clickPos = editorPanel.PointToClient(Cursor.Position);
 
 
 
             // add scroll
-            clickPos.X -= containerPanel.AutoScrollPosition.X;
-            clickPos.Y -= containerPanel.AutoScrollPosition.Y;
+            clickPos.X -= editorPanel.AutoScrollPosition.X;
+            clickPos.Y -= editorPanel.AutoScrollPosition.Y;
 
 
             if (clickPos.X < leftSideMargin || clickPos.Y < margin)
@@ -245,7 +333,7 @@ namespace Boomwhackers
                 noteType.RemoveNote(noteTime);
 
                 // Remove the button
-                foreach (Control c in containerPanel.Controls)
+                foreach (Control c in editorPanel.Controls)
                 {
                     if (c is NoteButton)
                     {
@@ -270,10 +358,6 @@ namespace Boomwhackers
 
             ChangeMade();
 
-
-
-            /*// Redraw the buttons
-            RedrawButtons();*/
         }
 
 
@@ -297,8 +381,8 @@ namespace Boomwhackers
             // if leftclick
             if (e.Button == MouseButtons.Left && isMoveDistance(mouseDownPos, new Point(e.X, e.Y)))
             {
-                containerPanel.Cursor = Cursors.Hand;
-                containerPanel.AutoScrollPosition = new Point(
+                editorPanel.Cursor = Cursors.Hand;
+                editorPanel.AutoScrollPosition = new Point(
                     mouseDownPos.X - e.X - lastEndPosition.X,
                     mouseDownPos.Y - e.Y - lastEndPosition.Y
                 );
@@ -309,9 +393,10 @@ namespace Boomwhackers
         {
             if (isMoveDistance(mouseDownPos, new Point(e.X, e.Y)))
             {
-                containerPanel.Cursor = Cursors.Default;
-                lastEndPosition = containerPanel.AutoScrollPosition;
-            } else
+                editorPanel.Cursor = Cursors.Default;
+                lastEndPosition = editorPanel.AutoScrollPosition;
+            }
+            else
             {
                 // It's a click
                 Editor_MouseClick(sender, e);

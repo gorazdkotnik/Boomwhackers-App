@@ -1,6 +1,6 @@
 ﻿namespace Boomwhackers
 {
-    partial class MusicPlayer
+    partial class PlayerForm
     {
         /// <summary>
         /// Required designer variable.

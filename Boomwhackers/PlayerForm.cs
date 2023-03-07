@@ -12,7 +12,7 @@ using System.Windows.Threading;
 
 namespace Boomwhackers
 {
-    public partial class MusicPlayer : Form
+    public partial class PlayerForm : Form
     {
         BoomProject openProject;
 
@@ -32,7 +32,7 @@ namespace Boomwhackers
         List<NoteButton> displayedNotes = new List<NoteButton>();
         Dictionary<int, NoteButton> noteTypeButtons = new Dictionary<int, NoteButton>();
 
-        public MusicPlayer(BoomProject project)
+        public PlayerForm(BoomProject project)
         {
             openProject = project;
 

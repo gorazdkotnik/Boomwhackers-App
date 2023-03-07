@@ -24,6 +24,8 @@ namespace Boomwhackers
 
         public BoomData data = new BoomData();
 
+        public string projectLocationIfKnown = null;
+
         // Create empty project
         public BoomProject()
         {
@@ -57,6 +59,8 @@ namespace Boomwhackers
             try
             {
                 File.WriteAllText(path, jsonData);
+
+                projectLocationIfKnown = path;
                 //MessageBox.Show("Projekt je bil uspešno shranjen.", "Shranjevanje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -73,9 +77,16 @@ namespace Boomwhackers
                 throw new Exception("Invalid file extension");
             }
 
-            string loadData = File.ReadAllText(loadFile);
+            try
+            {
+                string loadData = File.ReadAllText(loadFile);
 
-            LoadData(loadData);
+                LoadData(loadData);
+            } catch (FileNotFoundException e)
+            {
+                MessageBox.Show("Datoteka ne obstaja.", "Napaka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         public void LoadData(string loadData)
@@ -88,6 +99,14 @@ namespace Boomwhackers
             catch
             {
                 throw new InvalidDataException();
+            }
+        }
+
+        public void PreloadNoteSounds()
+        {
+            foreach (var note in data.notes)
+            {
+                note.PreloadSound();
             }
         }
     }

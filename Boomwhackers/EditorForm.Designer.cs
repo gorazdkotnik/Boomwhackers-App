@@ -1,6 +1,6 @@
 ﻿namespace Boomwhackers
 {
-    partial class Form1
+    partial class EditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -76,7 +76,7 @@
             this.OpenProjectItem.Name = "OpenProjectItem";
             this.OpenProjectItem.Size = new System.Drawing.Size(176, 22);
             this.OpenProjectItem.Text = "Odpri projekt";
-            this.OpenProjectItem.Click += new System.EventHandler(this.LoadProject);
+            this.OpenProjectItem.Click += new System.EventHandler(this.LoacProject_click);
             // 
             // SaveProjectItem
             // 
@@ -101,14 +101,17 @@
             this.editorPanel.Name = "editorPanel";
             this.editorPanel.Size = new System.Drawing.Size(1086, 433);
             this.editorPanel.TabIndex = 7;
+            this.editorPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseDown);
+            this.editorPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
+            this.editorPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseUp);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(318, 476);
+            this.button1.Location = new System.Drawing.Point(12, 466);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(102, 48);
             this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
+            this.button1.Text = "Predvajaj";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.openMusicPlayer_Click);
             // 
@@ -127,7 +130,7 @@
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
-            // Form1
+            // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -139,8 +142,9 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
+            this.Name = "EditorForm";
             this.Text = "Boomwhackers";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

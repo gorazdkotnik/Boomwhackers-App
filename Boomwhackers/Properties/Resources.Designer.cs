@@ -61,11 +61,104 @@ namespace Boomwhackers.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;data&quot;:{&quot;notes&quot;:[{&quot;displayName&quot;:&quot;test&quot;,&quot;displayColor&quot;:&quot;red&quot;,&quot;notes&quot;:[]},{&quot;displayName&quot;:&quot;test&quot;,&quot;displayColor&quot;:&quot;Teal&quot;,&quot;notes&quot;:[]},{&quot;displayName&quot;:&quot;2&quot;,&quot;displayColor&quot;:&quot;#FF8040&quot;,&quot;notes&quot;:[]},{&quot;displayName&quot;:&quot;asd&quot;,&quot;displayColor&quot;:&quot;Aqua&quot;,&quot;notes&quot;:[]},{&quot;displayName&quot;:&quot;dsg&quot;,&quot;displayColor&quot;:&quot;#8080C0&quot;,&quot;notes&quot;:[]}]}}.
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _do {
+            get {
+                return ResourceManager.GetStream("do", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///   &quot;data&quot;:{
+        ///      &quot;notes&quot;:[
+        ///         {
+        ///            &quot;displayName&quot;:&quot;do&quot;,
+        ///            &quot;displayColor&quot;:&quot;Red&quot;,
+        ///            &quot;soundLocation&quot;:&quot;resources://do&quot;,
+        ///            &quot;notes&quot;:[
+        ///               0.0
+        ///            ]
+        ///         },
+        ///         {
+        ///            &quot;displayName&quot;:&quot;re&quot;,
+        ///            &quot;displayColor&quot;:&quot;Yellow&quot;,
+        ///            &quot;soundLocation&quot;:&quot;resources://re&quot;,
+        ///            &quot;notes&quot;:[
+        ///               1.0
+        ///            ]
+        ///         },
+        ///         {
+        ///            &quot;displayName&quot;:&quot;mi&quot;,
+        ///            &quot;displayColor&quot;:&quot;#80FF00 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string defaultProject {
             get {
                 return ResourceManager.GetString("defaultProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream do2 {
+            get {
+                return ResourceManager.GetStream("do2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream fa {
+            get {
+                return ResourceManager.GetStream("fa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream la {
+            get {
+                return ResourceManager.GetStream("la", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mi {
+            get {
+                return ResourceManager.GetStream("mi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream re {
+            get {
+                return ResourceManager.GetStream("re", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream si {
+            get {
+                return ResourceManager.GetStream("si", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream sol {
+            get {
+                return ResourceManager.GetStream("sol", resourceCulture);
             }
         }
     }
