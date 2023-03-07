@@ -52,7 +52,6 @@ namespace Boomwhackers
         private void createProjectButton_Click(object sender, EventArgs e)
         {
             mainScreen.createProjectButton_Click(sender, e);
-            ShowMainScreen();
         }
         
         private void openProjectButton_Click(object sender, EventArgs e)
