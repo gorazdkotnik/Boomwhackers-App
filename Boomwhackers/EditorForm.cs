@@ -81,6 +81,7 @@ namespace Boomwhackers
             if (loadedProject != null)
             {
                 openProject = loadedProject;
+                RedrawButtons();
             }
         }
 
@@ -91,6 +92,7 @@ namespace Boomwhackers
             if (newProject != null)
             {
                 openProject = newProject;
+                RedrawButtons();
             }
         }
 
