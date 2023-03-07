@@ -60,10 +60,6 @@ namespace Boomwhackers
             }
         }
 
-        private void SetStatus(string text)
-        {
-            statusLabel.Text = text;
-        }
         private void openMusicPlayer_Click(object sender, EventArgs e)
         {
             if (openProject == null)
