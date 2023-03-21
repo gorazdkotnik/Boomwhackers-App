@@ -102,7 +102,7 @@
             this.editorPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.editorPanel.Location = new System.Drawing.Point(12, 27);
             this.editorPanel.Name = "editorPanel";
-            this.editorPanel.Size = new System.Drawing.Size(1086, 433);
+            this.editorPanel.Size = new System.Drawing.Size(1086, 417);
             this.editorPanel.TabIndex = 7;
             this.editorPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseDown);
             this.editorPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Editor_MouseMove);
@@ -111,7 +111,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(12, 466);
+            this.button1.Location = new System.Drawing.Point(12, 450);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 48);
             this.button1.TabIndex = 8;
