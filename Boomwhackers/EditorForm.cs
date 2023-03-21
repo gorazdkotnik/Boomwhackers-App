@@ -266,7 +266,8 @@ namespace Boomwhackers
                 Text = "+",
                 Location = new Point(margin, margin + rowHeight * row),
                 Size = new Size(firstColumnWidth, rowHeight),
-                BackColor = Color.LightGray
+                BackColor = Color.LightGray,
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom
             };
 
             addNoteTypeBtn.MouseClick += (sender, e) =>

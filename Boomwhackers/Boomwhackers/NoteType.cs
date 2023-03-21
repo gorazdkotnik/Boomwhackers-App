@@ -55,16 +55,11 @@ namespace Boomwhackers
 
         #region Sound
 
-        SoundPlayer player;
-
         public void PlaySound()
         {
             if (soundLocation != null)
             {
-                if (player == null)
-                    PreloadSound();
-
-                player.Play();
+                NotePlayer.Play(soundLocation);
             }
         }
 
@@ -72,17 +67,7 @@ namespace Boomwhackers
         {
             if (soundLocation != null)
             {
-                // We use this for the default project
-                if (soundLocation.StartsWith("resources://"))
-                {
-                    string resourceName = soundLocation.Substring(12);
-                    Stream stream = Properties.Resources.ResourceManager.GetStream(resourceName);
-                    player = new SoundPlayer(stream);
-                }
-                else
-                {
-                    player = new SoundPlayer(soundLocation);
-                }
+                NotePlayer.Preload(soundLocation);
             }
         }
 

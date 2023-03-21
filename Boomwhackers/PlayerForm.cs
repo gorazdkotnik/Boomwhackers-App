@@ -53,6 +53,9 @@ namespace Boomwhackers
 
             b.noteTypeIndex = noteTypeIndex;
 
+            // Bottom left
+            b.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+
             return b;
         }
 

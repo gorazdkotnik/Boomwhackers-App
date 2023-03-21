@@ -43,6 +43,9 @@
             // 
             // musicPlayerPanel
             // 
+            this.musicPlayerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.musicPlayerPanel.Controls.Add(this.noDataLabel);
             this.musicPlayerPanel.Location = new System.Drawing.Point(9, 56);
             this.musicPlayerPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -102,6 +105,7 @@
             // 
             // BPMLabel
             // 
+            this.BPMLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BPMLabel.AutoSize = true;
             this.BPMLabel.Location = new System.Drawing.Point(508, 18);
             this.BPMLabel.Name = "BPMLabel";
@@ -111,6 +115,7 @@
             // 
             // BPMInput
             // 
+            this.BPMInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BPMInput.Location = new System.Drawing.Point(544, 16);
             this.BPMInput.Maximum = new decimal(new int[] {
             500,
@@ -122,7 +127,7 @@
             this.BPMInput.TabIndex = 7;
             this.BPMInput.ValueChanged += new System.EventHandler(this.BPMInput_ValueChanged);
             // 
-            // MusicPlayer
+            // PlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,7 +139,7 @@
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.musicPlayerPanel);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "MusicPlayer";
+            this.Name = "PlayerForm";
             this.Text = "Predvajalnik not";
             this.musicPlayerPanel.ResumeLayout(false);
             this.musicPlayerPanel.PerformLayout();

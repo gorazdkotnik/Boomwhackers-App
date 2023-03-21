@@ -94,6 +94,9 @@
             // 
             // editorPanel
             // 
+            this.editorPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.editorPanel.AutoScroll = true;
             this.editorPanel.AutoScrollMargin = new System.Drawing.Size(500, 500);
             this.editorPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -107,6 +110,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Location = new System.Drawing.Point(12, 466);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 48);
